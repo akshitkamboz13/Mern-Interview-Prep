@@ -42,13 +42,10 @@ const RouteTracker = () => {
 
     // Tracking
     useEffect(() => {
-        if (location.pathname !== '/') {
-            // Don't save '/' as it's the default anyway, saving specific pages is more useful
-            // Actually saving '/' is fine if they really left there.
-            // localforage.setItem('lastLocation', location.pathname);
-        }
+        if (!isRestored) return; // Verify restoration is complete before tracking
+
         localforage.setItem('lastLocation', location.pathname).catch(err => console.error('Failed to save loc', err));
-    }, [location]);
+    }, [location, isRestored]);
 
     return null;
 };
