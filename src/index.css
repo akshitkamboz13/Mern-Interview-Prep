@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
@@ -6,9 +6,46 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-luxury: 'Cinzel Decorative', cursive;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Custom Color Palette Extension if needed */
+}
+
+/* Dark Theme (Darker than default) */
+html.dark {
+  --color-slate-950: #020204;
+  /* Almost black */
+  --color-slate-900: #0f1016;
+  /* Very dark gray */
+  --color-slate-800: #1e202e;
+}
+
+/* Obsidian Theme (Deep Purple) */
+.obsidian {
+  --color-slate-950: #1a0b2e;
+  /* Visible Deep Purple */
+  --color-slate-900: #2d1b4e;
+  /* Lighter Purple for cards */
+  --color-slate-800: #432c7a;
+  /* Highlight Purple */
+  --color-slate-700: #5b3a9c;
+  background-color: var(--color-slate-950) !important;
+}
+
+/* Sunrise Theme (Warm) */
+.sunrise {
+  --color-slate-50: #fffbf0;
+  --color-slate-100: #fef3c7;
+  --color-slate-200: #fde68a;
+  background-color: var(--color-slate-50) !important;
+}
+
+/* Make sure the text color adapts in sunrise if needed, 
+   though standard slate-900 usually works well on warm backgrounds too. */
+.sunrise body {
+  color: #451a03;
+  /* Amber-950 likes */
 }
 
 
@@ -29,6 +66,10 @@ h6 {
   font-family: var(--font-display);
   letter-spacing: -0.025em;
   /* Tighter tracking for display font */
+}
+
+.font-luxury {
+  font-family: var(--font-luxury);
 }
 
 /* Scrollbar Styling */

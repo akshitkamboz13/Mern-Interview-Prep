@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { SyllabusProvider } from './context/SyllabusContext';
 
+import RouteTracker from './components/common/RouteTracker';
+
 // Lazy Load Layout and Pages
 const Layout = React.lazy(() => import('./components/layout/Layout'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -21,6 +23,7 @@ function App() {
   return (
     <SyllabusProvider>
       <BrowserRouter>
+        <RouteTracker />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Layout />}>

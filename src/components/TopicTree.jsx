@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronRight, ChevronDown, CheckCircle2, BookOpen, Clock, AlertCircle, Bookmark, Star } from 'lucide-react';
 import { useSyllabus } from '../context/SyllabusContext';
 import clsx from 'clsx';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Priority Configuration
 const PRIORITY_CONFIG = {
@@ -22,6 +23,17 @@ const PriorityBadge = ({ priority }) => {
     );
 };
 
+// Level Color Configuration
+const LEVEL_COLORS = [
+    { name: 'indigo', border: 'border-indigo-500', text: 'text-indigo-600 dark:text-indigo-400', title: 'text-indigo-700 dark:text-indigo-300', bg: 'bg-indigo-50 dark:bg-indigo-500/10', hover: 'hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5' },
+    { name: 'emerald', border: 'border-emerald-500', text: 'text-emerald-600 dark:text-emerald-400', title: 'text-emerald-700 dark:text-emerald-300', bg: 'bg-emerald-50 dark:bg-emerald-500/10', hover: 'hover:bg-emerald-50/50 dark:hover:bg-emerald-500/5' },
+    { name: 'amber', border: 'border-amber-500', text: 'text-amber-600 dark:text-amber-400', title: 'text-amber-700 dark:text-amber-300', bg: 'bg-amber-50 dark:bg-amber-500/10', hover: 'hover:bg-amber-50/50 dark:hover:bg-amber-500/5' },
+    { name: 'rose', border: 'border-rose-500', text: 'text-rose-600 dark:text-rose-400', title: 'text-rose-700 dark:text-rose-300', bg: 'bg-rose-50 dark:bg-rose-500/10', hover: 'hover:bg-rose-50/50 dark:hover:bg-rose-500/5' },
+    { name: 'sky', border: 'border-sky-500', text: 'text-sky-600 dark:text-sky-400', title: 'text-sky-700 dark:text-sky-300', bg: 'bg-sky-50 dark:bg-sky-500/10', hover: 'hover:bg-sky-50/50 dark:hover:bg-sky-500/5' },
+];
+
+const getLevelStyle = (depth) => LEVEL_COLORS[depth % LEVEL_COLORS.length];
+
 const TopicNode = ({ node, depth = 0, onDeepDive }) => {
     const { getTopicStatus, updateStatus, focusedTopicId, toggleTopicExpansion, isTopicExpanded, expandTopics } = useSyllabus();
     const isOpen = isTopicExpanded(node.id);
@@ -29,6 +41,8 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
     const status = getTopicStatus(node.id);
     const hasChildren = node.children && node.children.length > 0;
     const isLeaf = !hasChildren;
+
+    const levelStyle = getLevelStyle(depth);
 
     // Check if this node is in the path of the focused topic
     const containsFocus = React.useMemo(() => {
@@ -44,12 +58,6 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
     // Auto-expand if in path
     React.useEffect(() => {
         if (containsFocus && !isOpen) {
-            // We need to expand this node.
-            // Ideally we'd expand the whole path at once from the parent, but this works distributedly too.
-            // However, expanding one by one might trigger multiple saves.
-            // Better: The context's `expandTopics` handles batching if we passed an array, 
-            // but here we are in a recursive component.
-            // Let's just toggle this one if it's not open.
             toggleTopicExpansion(node.id);
         }
     }, [containsFocus]);
@@ -58,7 +66,6 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
     React.useEffect(() => {
         if (focusedTopicId === node.id && nodeRef.current) {
             nodeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Highlight effect?
         }
     }, [focusedTopicId, node.id]);
 
@@ -71,16 +78,17 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
         <div className="select-none relative" ref={nodeRef}>
             <div
                 className={clsx(
-                    "group flex flex-col sm:flex-row sm:items-center py-3 sm:py-3 pr-2 sm:pr-4 border-b border-slate-200 dark:border-slate-800/50 transition-all duration-200 cursor-pointer",
-                    "hover:bg-slate-100 dark:hover:bg-slate-800/40",
-                    isOpen && hasChildren ? "bg-slate-50 dark:bg-slate-800/20" : "bg-transparent"
+                    "group flex flex-col sm:flex-row sm:items-center py-3 sm:py-3 pr-2 sm:pr-4 border-b border-slate-100 dark:border-slate-800/30 transition-all duration-200 cursor-pointer border-l-4",
+                    levelStyle.hover,
+                    levelStyle.border,
+                    isOpen && hasChildren ? levelStyle.bg : "bg-transparent"
                 )}
                 style={{ paddingLeft: `max(0.5rem, calc(${depth} * 1rem + 0.5rem))` }}
                 onClick={() => toggleTopicExpansion(node.id)}
             >
                 <div className="flex items-start w-full sm:w-auto">
                     {/* Expand/Collapse Icon */}
-                    <div className="mr-2 mt-1 sm:mt-0 text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors flex-shrink-0">
+                    <div className={clsx("mr-2 mt-1 sm:mt-0 transition-colors flex-shrink-0", levelStyle.text)}>
                         {hasChildren ? (
                             <div className={clsx("transform transition-transform duration-200", isOpen && "rotate-90")}>
                                 <ChevronRight size={18} />
@@ -88,7 +96,7 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                         ) : (
                             // Dot for leaf nodes
                             <div className="w-[18px] flex justify-center pt-1 sm:pt-0">
-                                <div className={clsx("w-2 h-2 rounded-full ring-2 ring-slate-200 dark:ring-slate-900", status === 'Mastered' ? "bg-emerald-500" : status === 'Learning' ? "bg-amber-500" : "bg-slate-400 dark:bg-slate-700")} />
+                                <div className={clsx("w-2 h-2 rounded-full ring-2 ring-slate-200 dark:ring-slate-900", status === 'Mastered' ? "bg-emerald-500" : status === 'Learning' ? "bg-amber-500" : "bg-slate-300 dark:bg-slate-700")} />
                             </div>
                         )}
                     </div>
@@ -98,8 +106,8 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
                             <span className={clsx(
                                 "font-medium transition-colors text-sm sm:text-base",
-                                status === 'Mastered' ? "text-slate-500 line-through decoration-slate-400 dark:decoration-slate-600" : "text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white",
-                                depth === 0 && "text-base sm:text-lg font-semibold text-indigo-700 dark:text-indigo-100" // Larger root nodes
+                                status === 'Mastered' ? "text-slate-500 line-through decoration-slate-400 dark:decoration-slate-600" : levelStyle.title,
+                                depth === 0 && "text-base sm:text-lg font-bold" // Larger root nodes
                             )}>
                                 {node.title}
                             </span>
@@ -125,7 +133,7 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                             "flex flex-1 sm:flex-none items-center justify-center gap-2 sm:gap-0 px-3 py-1.5 sm:p-2 rounded-lg transition-all text-xs sm:text-sm font-medium border",
                             status === 'Learning'
                                 ? "bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-500 border-amber-200 dark:border-amber-500/30"
-                                : "text-slate-400 dark:text-slate-400 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700/50 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-amber-600 dark:hover:text-amber-400"
+                                : "text-slate-400 dark:text-slate-500 bg-white/50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/30 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-amber-600 dark:hover:text-amber-400"
                         )}
                     >
                         <Clock size={16} />
@@ -138,7 +146,7 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                             "flex flex-1 sm:flex-none items-center justify-center gap-2 sm:gap-0 px-3 py-1.5 sm:p-2 rounded-lg transition-all text-xs sm:text-sm font-medium border",
                             status === 'Mastered'
                                 ? "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-500 border-emerald-200 dark:border-emerald-500/30"
-                                : "text-slate-400 dark:text-slate-400 bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700/50 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400"
+                                : "text-slate-400 dark:text-slate-500 bg-white/50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700/30 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-emerald-600 dark:hover:text-emerald-400"
                         )}
                     >
                         <CheckCircle2 size={16} />
@@ -148,49 +156,67 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
             </div>
 
             {/* Description Panel */}
-            {isOpen && node.description && (
-                <div className="relative bg-slate-50 dark:bg-slate-950/30 border-b border-slate-200 dark:border-slate-800/50">
-                    <div
-                        className="py-3 pr-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
-                        style={{ paddingLeft: `calc(${depth} * 1rem + 2rem)` }}
+            <AnimatePresence>
+                {isOpen && node.description && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
                     >
-                        <div className="mb-1.5 font-medium text-slate-500 dark:text-slate-300 flex items-center gap-2 text-xs uppercase tracking-wider opacity-70">
-                            <BookOpen size={12} className="text-indigo-500 dark:text-indigo-400" />
-                            Summary
-                        </div>
-                        {node.description}
-
-                        <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/50">
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    if (onDeepDive) {
-                                        onDeepDive(`${node.title} ${node.briefDescription || ''} full tutorial`, node.id);
-                                    }
-                                }}
-                                className="flex items-center gap-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition-colors"
+                        <div className={clsx("relative border-b", levelStyle.bg, levelStyle.border)}>
+                            <div
+                                className="py-3 pr-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                                style={{ paddingLeft: `calc(${depth} * 1rem + 2rem)` }}
                             >
-                                <span>Deep Dive Analysis</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                            </button>
+                                <div className={clsx("mb-1.5 font-medium flex items-center gap-2 text-xs uppercase tracking-wider opacity-90", levelStyle.text)}>
+                                    <BookOpen size={12} />
+                                    Summary
+                                </div>
+                                {node.description}
+
+                                <div className={clsx("mt-4 pt-3 border-t", levelStyle.border)}>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (onDeepDive) {
+                                                onDeepDive(`${node.title} ${node.briefDescription || ''} full tutorial`, node.id);
+                                            }
+                                        }}
+                                        className={clsx("flex items-center gap-2 text-xs font-semibold hover:opacity-80 transition-opacity", levelStyle.text)}
+                                    >
+                                        <span>Deep Dive Analysis</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Children Container */}
-            {isOpen && hasChildren && (
-                <div className="relative">
-                    {/* Guide line */}
-                    <div
-                        className="absolute top-0 bottom-0 border-l border-slate-200 dark:border-slate-800/50"
-                        style={{ left: `calc(${depth} * 1rem + 0.9rem)` }}
-                    />
-                    {node.children.map(child => (
-                        <TopicNode key={child.id} node={child} depth={depth + 1} onDeepDive={onDeepDive} />
-                    ))}
-                </div>
-            )}
+            <AnimatePresence>
+                {isOpen && hasChildren && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="relative overflow-hidden"
+                    >
+                        {/* Guide line - Uses current level color to indicate 'this block belongs to X' */}
+                        <div
+                            className={clsx("absolute top-0 bottom-0 border-l", levelStyle.border)}
+                            style={{ left: `calc(${depth} * 1rem + 0.9rem)` }}
+                        />
+                        {node.children.map(child => (
+                            <TopicNode key={child.id} node={child} depth={depth + 1} onDeepDive={onDeepDive} />
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

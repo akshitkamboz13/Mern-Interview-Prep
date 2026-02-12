@@ -27,43 +27,49 @@ const Dashboard = () => {
                 </p>
             </header>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group transition-colors">
-                    {/* Background Glow */}
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all"></div>
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 mb-6 sm:mb-10">
+                <div className="bg-white dark:bg-slate-800 p-3 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group transition-colors">
+                    {/* Background Glow - Hidden on mobile */}
+                    <div className="hidden sm:block absolute -right-4 -top-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all"></div>
 
-                    <div className="flex items-center gap-3 mb-3 text-slate-600 dark:text-slate-300 relative z-10 transition-colors">
-                        <div className="p-2 bg-indigo-100 dark:bg-indigo-500/10 rounded-lg text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/10 transition-colors">
-                            <Target size={20} />
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-3 mb-1 sm:mb-3 text-slate-600 dark:text-slate-300 relative z-10 transition-colors">
+                        <div className="p-1.5 sm:p-2 bg-indigo-100 dark:bg-indigo-500/10 rounded-lg text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/10 transition-colors">
+                            <Target size={18} className="sm:w-5 sm:h-5" />
                         </div>
-                        <h3 className="font-medium">To Learn</h3>
+                        <h3 className="font-medium text-[10px] sm:text-base uppercase tracking-wider sm:tracking-normal sm:normal-case mt-1 sm:mt-0">To Learn</h3>
                     </div>
-                    <p className="text-3xl font-bold text-slate-800 dark:text-white relative z-10 transition-colors">{stats.pending}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 relative z-10 transition-colors">Pending Topics</p>
+                    <div className="text-center sm:text-left relative z-10">
+                        <p className="text-xl sm:text-3xl font-bold text-slate-800 dark:text-white transition-colors">{stats.pending}</p>
+                        <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 transition-colors">Pending</p>
+                    </div>
                 </div>
 
-                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group transition-colors">
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
-                    <div className="flex items-center gap-3 mb-3 text-slate-600 dark:text-slate-300 relative z-10 transition-colors">
-                        <div className="p-2 bg-amber-100 dark:bg-amber-500/10 rounded-lg text-amber-600 dark:text-amber-500 border border-amber-200 dark:border-amber-500/10 transition-colors">
-                            <BookOpen size={20} />
+                <div className="bg-white dark:bg-slate-800 p-3 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group transition-colors">
+                    <div className="hidden sm:block absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-3 mb-1 sm:mb-3 text-slate-600 dark:text-slate-300 relative z-10 transition-colors">
+                        <div className="p-1.5 sm:p-2 bg-amber-100 dark:bg-amber-500/10 rounded-lg text-amber-600 dark:text-amber-500 border border-amber-200 dark:border-amber-500/10 transition-colors">
+                            <BookOpen size={18} className="sm:w-5 sm:h-5" />
                         </div>
-                        <h3 className="font-medium">Learning</h3>
+                        <h3 className="font-medium text-[10px] sm:text-base uppercase tracking-wider sm:tracking-normal sm:normal-case mt-1 sm:mt-0">Learning</h3>
                     </div>
-                    <p className="text-3xl font-bold text-amber-500 dark:text-amber-400 relative z-10 transition-colors">{stats.learning}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 relative z-10 transition-colors">In Progress</p>
+                    <div className="text-center sm:text-left relative z-10">
+                        <p className="text-xl sm:text-3xl font-bold text-amber-500 dark:text-amber-400 transition-colors">{stats.learning}</p>
+                        <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 transition-colors">In Progress</p>
+                    </div>
                 </div>
 
-                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group transition-colors">
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
-                    <div className="flex items-center gap-3 mb-3 text-slate-600 dark:text-slate-300 relative z-10 transition-colors">
-                        <div className="p-2 bg-emerald-100 dark:bg-emerald-500/10 rounded-lg text-emerald-600 dark:text-emerald-500 border border-emerald-200 dark:border-emerald-500/10 transition-colors">
-                            <Trophy size={20} />
+                <div className="bg-white dark:bg-slate-800 p-3 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden group transition-colors">
+                    <div className="hidden sm:block absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-1 sm:gap-3 mb-1 sm:mb-3 text-slate-600 dark:text-slate-300 relative z-10 transition-colors">
+                        <div className="p-1.5 sm:p-2 bg-emerald-100 dark:bg-emerald-500/10 rounded-lg text-emerald-600 dark:text-emerald-500 border border-emerald-200 dark:border-emerald-500/10 transition-colors">
+                            <Trophy size={18} className="sm:w-5 sm:h-5" />
                         </div>
-                        <h3 className="font-medium">Mastered</h3>
+                        <h3 className="font-medium text-[10px] sm:text-base uppercase tracking-wider sm:tracking-normal sm:normal-case mt-1 sm:mt-0">Mastered</h3>
                     </div>
-                    <p className="text-3xl font-bold text-emerald-500 dark:text-emerald-400 relative z-10 transition-colors">{stats.mastered}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 relative z-10 transition-colors">Completed Topics</p>
+                    <div className="text-center sm:text-left relative z-10">
+                        <p className="text-xl sm:text-3xl font-bold text-emerald-500 dark:text-emerald-400 transition-colors">{stats.mastered}</p>
+                        <p className="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 transition-colors">Completed</p>
+                    </div>
                 </div>
             </div>
 

@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, Repeat, Settings, Database, Code, Server, Globe } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Repeat, Settings, Database, Code, Server, Globe, Crown } from 'lucide-react';
 import clsx from 'clsx';
+import { useSyllabus } from '../../context/SyllabusContext';
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     const [time, setTime] = React.useState(new Date());
+    const { theme } = useSyllabus();
 
     React.useEffect(() => {
         const timer = setInterval(() => setTime(new Date()), 1000);
@@ -18,18 +20,30 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         { path: '/settings', label: 'Settings', icon: Settings },
     ];
 
+    // Dynamic Gradient based on Theme
+    const getBrandGradient = () => {
+        switch (theme) {
+            case 'obsidian': return "from-fuchsia-400 to-amber-300"; // Mystic Royal
+            case 'dark': return "from-amber-200 to-yellow-500"; // Pure Gold
+            case 'sunrise': return "from-amber-600 to-yellow-800"; // Antique Bronze
+            default: return "from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400"; // Fallback (though theme is always set)
+        }
+    };
+
+    const gradientClass = getBrandGradient();
+
     return (
-        <aside className="h-full flex flex-col pt-20 md:pt-6 pb-6 px-4">
-            <div className="mb-8 px-2 hidden md:block">
+        <aside className="h-full flex flex-col pt-6 pb-6 px-4">
+            <div className="mb-8 px-2 block">
                 <div className="flex items-center gap-2 mb-1">
-                    <span className="p-1.5 bg-indigo-500/10 text-indigo-500 rounded-lg">
-                        <Code size={20} />
-                    </span>
-                    <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-                        PrepPro
+                    {/* <span className="p-1 bg-amber-500/10 text-amber-500 rounded-lg">
+                        <Crown size={14} />
+                    </span> */}
+                    <h1 className={clsx("text-xl font-bold font-luxury tracking-[0.15em] uppercase bg-gradient-to-r bg-clip-text text-transparent transition-all duration-500", gradientClass)}>
+                        VERTEX
                     </h1>
                 </div>
-                <p className="text-xs text-slate-500 dark:text-slate-500 font-mono">MERN Stack Edition</p>
+                <p className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 font-medium ml-1">MERN Stack Mastery</p>
             </div>
 
             <nav className="flex-1 space-y-1">

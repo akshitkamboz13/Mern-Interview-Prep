@@ -12,9 +12,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Interview Prep Pro',
-        short_name: 'PrepPro',
-        description: 'Track your interview questions and revise instantly.',
+        name: 'VERTEX - Master the MERN Stack',
+        short_name: 'VERTEX',
+        description: 'Premium roadmap and tracker for MERN stack mastery.',
         theme_color: '#0f172a',
         background_color: '#0f172a',
         display: 'standalone',

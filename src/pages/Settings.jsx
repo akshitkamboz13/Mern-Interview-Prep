@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSyllabus } from '../context/SyllabusContext';
-import { Trash2, Github, Info, AlertTriangle, Moon, Sun, Check } from 'lucide-react';
+import { Trash2, Github, Info, AlertTriangle, Moon, Sun, Check, Download } from 'lucide-react';
 import clsx from 'clsx';
 
 const Settings = () => {
-    const { resetProgress, theme, toggleTheme, searchHistory, clearHistory, focusTopic, expansionMode, setExpansionMode, openDeepDive } = useSyllabus();
+    const { resetProgress, themeMode, setThemeMode, autoType, setAutoType, deviceDark, setDeviceDark, deviceLight, setDeviceLight, searchHistory, clearHistory, focusTopic, expansionMode, setExpansionMode, openDeepDive, isInstallable, installApp, startUpMode, setStartUpMode } = useSyllabus();
 
     // ... (rest of component state)
 
@@ -50,40 +50,87 @@ const Settings = () => {
 
             <div className="space-y-8">
                 {/* Visual Settings */}
+                {/* Visual Settings */}
                 <section className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 transition-colors shadow-sm">
                     <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2 transition-colors">
                         <Sun size={20} className="text-amber-500 dark:text-amber-400" />
                         Appearance
                     </h2>
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-slate-700 dark:text-slate-300 font-medium transition-colors">Theme</p>
-                            <p className="text-xs text-slate-500">Customize the application look.</p>
+
+                    <div className="space-y-6">
+                        {/* Theme Mode Selection */}
+                        <div className="bg-slate-50 dark:bg-slate-900/50 p-1 rounded-xl flex flex-wrap gap-1">
+                            {['light', 'sunrise', 'auto', 'obsidian', 'dark'].map((mode) => (
+                                <button
+                                    key={mode}
+                                    onClick={() => setThemeMode(mode)}
+                                    className={clsx(
+                                        "flex-1 min-w-[80px] py-2 rounded-lg text-xs font-medium capitalize transition-all",
+                                        themeMode === mode
+                                            ? "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm ring-1 ring-black/5 dark:ring-white/10"
+                                            : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-slate-800/50"
+                                    )}
+                                >
+                                    {mode}
+                                </button>
+                            ))}
                         </div>
-                        <div className="flex bg-slate-100 dark:bg-slate-900 rounded-lg p-1 border border-slate-200 dark:border-slate-700 transition-colors">
-                            <button
-                                onClick={() => theme !== 'dark' && toggleTheme()}
-                                className={clsx(
-                                    "px-3 py-1.5 rounded-md text-xs font-medium transition-all",
-                                    theme === 'dark'
-                                        ? "bg-slate-700 text-slate-200 shadow-sm"
-                                        : "text-slate-500 hover:text-slate-700"
+
+                        {/* Auto Settings */}
+                        {themeMode === 'auto' && (
+                            <div className="space-y-4 animate-in slide-in-from-top-4 duration-300">
+                                {/* Auto Logic Type */}
+                                <div className="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                                    <div>
+                                        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Auto Switching Logic</p>
+                                        <p className="text-xs text-slate-500 mt-0.5">
+                                            {autoType === 'device' ? 'Matches your system settings.' : 'Changes based on time of day.'}
+                                        </p>
+                                    </div>
+                                    <div className="flex bg-slate-100 dark:bg-slate-900 rounded-lg p-1">
+                                        <button
+                                            onClick={() => setAutoType('device')}
+                                            className={clsx("px-3 py-1.5 rounded-md text-xs font-medium transition-all", autoType === 'device' ? "bg-white dark:bg-slate-800 shadow-sm" : "opacity-60")}
+                                        >
+                                            Device
+                                        </button>
+                                        <button
+                                            onClick={() => setAutoType('daylight')}
+                                            className={clsx("px-3 py-1.5 rounded-md text-xs font-medium transition-all", autoType === 'daylight' ? "bg-white dark:bg-slate-800 shadow-sm" : "opacity-60")}
+                                        >
+                                            Daylight
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Device Preference Logic */}
+                                {autoType === 'device' && (
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="p-3 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                                            <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wider">On Light Mode</p>
+                                            <div className="flex gap-2">
+                                                <button onClick={() => setDeviceLight('light')} className={clsx("flex-1 py-1.5 text-xs rounded border transition-colors", deviceLight === 'light' ? "bg-white border-slate-300 shadow-sm text-slate-900 font-medium" : "border-transparent opacity-60 text-slate-600")}>Light</button>
+                                                <button onClick={() => setDeviceLight('sunrise')} className={clsx("flex-1 py-1.5 text-xs rounded border", deviceLight === 'sunrise' ? "bg-amber-50 border-amber-200 text-amber-900 shadow-sm" : "border-transparent opacity-60")}>Sunrise</button>
+                                            </div>
+                                        </div>
+                                        <div className="p-3 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                                            <p className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wider">On Dark Mode</p>
+                                            <div className="flex gap-2">
+                                                <button onClick={() => setDeviceDark('obsidian')} className={clsx("flex-1 py-1.5 text-xs rounded border", deviceDark === 'obsidian' ? "bg-black text-white border-slate-800 shadow-sm" : "border-transparent opacity-60")}>Obsidian</button>
+                                                <button onClick={() => setDeviceDark('dark')} className={clsx("flex-1 py-1.5 text-xs rounded border", deviceDark === 'dark' ? "bg-slate-800 text-white border-slate-700 shadow-sm" : "border-transparent opacity-60")}>Dark</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 )}
-                            >
-                                Dark
-                            </button>
-                            <button
-                                onClick={() => theme !== 'light' && toggleTheme()}
-                                className={clsx(
-                                    "px-3 py-1.5 rounded-md text-xs font-medium transition-all",
-                                    theme === 'light'
-                                        ? "bg-white text-slate-700 shadow-sm"
-                                        : "text-slate-500 hover:text-slate-700"
+
+                                {/* Daylight Info */}
+                                {autoType === 'daylight' && (
+                                    <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-xs text-indigo-800 dark:text-indigo-300 leading-relaxed">
+                                        Schedule: <span className="font-semibold">Sunrise</span> (6-9 AM) → <span className="font-semibold">Light</span> (9 AM-4 PM) → <span className="font-semibold">Obsidian</span> (4-9 PM) → <span className="font-semibold">Dark</span> (9 PM-6 AM).
+                                    </div>
                                 )}
-                            >
-                                Light
-                            </button>
-                        </div>
+                            </div>
+                        )}
                     </div>
                 </section>
 
@@ -248,6 +295,32 @@ const Settings = () => {
                         </button>
                     </div>
                 </section>
+
+                {/* App Installation (Only visible if installable) */}
+                {isInstallable && (
+                    <section className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2-10 10-5-10-5-10 5 10 5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
+                        </div>
+                        <div className="relative z-10 flex items-center justify-between">
+                            <div>
+                                <h2 className="text-lg font-semibold mb-1 flex items-center gap-2">
+                                    <Download size={20} className="text-white/90" />
+                                    Install App
+                                </h2>
+                                <p className="text-indigo-100 text-sm max-w-xs">
+                                    Install VERTEX on your device for a faster, native-like experience.
+                                </p>
+                            </div>
+                            <button
+                                onClick={installApp}
+                                className="px-5 py-2.5 bg-white text-indigo-600 font-semibold rounded-xl shadow-md hover:bg-indigo-50 transition-colors active:scale-95"
+                            >
+                                Install
+                            </button>
+                        </div>
+                    </section>
+                )}
 
                 {/* About */}
                 <section className="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 transition-colors shadow-sm">

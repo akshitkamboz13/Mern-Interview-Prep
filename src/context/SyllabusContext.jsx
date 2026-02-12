@@ -10,33 +10,38 @@ export const useSyllabus = () => {
 export const SyllabusProvider = ({ children }) => {
     const [syllabus, setSyllabus] = useState(null);
     const [progress, setProgress] = useState({}); // { [topicId]: 'Learning' | 'Mastered' }
-    const [theme, setTheme] = useState('dark');
+    // Theme & Appearance State
+    const [themeMode, setThemeMode] = useState('auto'); // 'auto' | 'dark' | 'light' | 'obsidian' | 'sunrise'
+    const [autoType, setAutoType] = useState('device'); // 'device' | 'daylight'
+    const [deviceDark, setDeviceDark] = useState('dark'); // 'dark' | 'obsidian'
+    const [deviceLight, setDeviceLight] = useState('light'); // 'light' | 'sunrise'
+    const [effectiveTheme, setEffectiveTheme] = useState('dark'); // The actual applied theme class
+
     const [searchHistory, setSearchHistory] = useState([]);
     const [expandedTopics, setExpandedTopics] = useState([]); // Array of IDs
     const [expansionMode, setExpansionMode] = useState('persist'); // 'persist' | 'reset' | 'accordion'
+    const [startUpMode, setStartUpMode] = useState('dashboard'); // 'dashboard' | 'last'
     const [loading, setLoading] = useState(true);
     const [flatTopics, setFlatTopics] = useState([]);
 
     useEffect(() => {
         // Initialize storage
         localforage.config({
-            name: 'InterviewPrepPRO',
+            name: 'VERTEX',
             storeName: 'syllabus_progress'
         });
 
         const initData = async () => {
             try {
+                // ... (Load Syllabus & Progress - Keeping existing code structure if possible, but for brevity re-implementing relevant parts)
                 // 1. Load Syllabus Data
-                // In a real app we might fetch this, but for now we import it or fetch from public
                 const response = await fetch('/resources/MERN/MERN-roadmap-data.json');
                 const data = await response.json();
                 setSyllabus(data);
 
-                // 2. Flatten topics for easy access/random selection
+                // 2. Flatten topics
                 const flattened = [];
                 const traverse = (node) => {
-                    // Only add leaf nodes or substantive nodes to the flat list for revision?
-                    // actually, let's add everything that has an ID.
                     if (node.id) flattened.push(node);
                     if (node.children) node.children.forEach(traverse);
                 };
@@ -45,27 +50,41 @@ export const SyllabusProvider = ({ children }) => {
 
                 // 3. Load Progress
                 const storedProgress = await localforage.getItem('progress');
-                if (storedProgress) {
-                    setProgress(storedProgress);
+                if (storedProgress) setProgress(storedProgress);
+
+                // 4. Load Theme Settings
+                const storedThemeMode = await localforage.getItem('themeMode');
+                if (storedThemeMode) setThemeMode(storedThemeMode);
+
+                const storedAutoType = await localforage.getItem('autoType');
+                if (storedAutoType) setAutoType(storedAutoType);
+
+                const storedDeviceDark = await localforage.getItem('deviceDark');
+                if (storedDeviceDark) setDeviceDark(storedDeviceDark);
+
+                const storedDeviceLight = await localforage.getItem('deviceLight');
+                if (storedDeviceLight) setDeviceLight(storedDeviceLight);
+
+                // Legacy theme support (migration)
+                const legacyTheme = await localforage.getItem('theme');
+                if (legacyTheme && !storedThemeMode) {
+                    setThemeMode(legacyTheme); // 'light' or 'dark' maps directly
                 }
 
-                // 4. Load Theme & History
-                const storedTheme = await localforage.getItem('theme');
-                if (storedTheme) setTheme(storedTheme);
-
+                // 5. Load History & Expansion
                 const storedHistory = await localforage.getItem('searchHistory');
                 if (storedHistory) setSearchHistory(storedHistory);
 
-                // 5. Load Expansion Settings
                 const storedMode = await localforage.getItem('expansionMode');
                 if (storedMode) setExpansionMode(storedMode);
 
-                // Only load expanded topics if we are NOT in reset mode
-                // If init mode is 'reset', we just leave it empty []
                 if (storedMode !== 'reset') {
                     const storedExpansion = await localforage.getItem('expandedTopics');
                     if (storedExpansion) setExpandedTopics(storedExpansion);
                 }
+
+                const storedStartUp = await localforage.getItem('startUpMode');
+                if (storedStartUp) setStartUpMode(storedStartUp);
 
             } catch (err) {
                 console.error('Failed to init syllabus:', err);
@@ -77,25 +96,86 @@ export const SyllabusProvider = ({ children }) => {
         initData();
     }, []);
 
-    // Apply Theme Side Effect
+    // Calculate Effective Theme
     useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
+        const calculateTheme = () => {
+            if (themeMode !== 'auto') {
+                setEffectiveTheme(themeMode);
+                return;
+            }
+
+            if (autoType === 'daylight') {
+                const hour = new Date().getHours();
+                // 06-09: Sunrise
+                // 09-16: Light
+                // 16-21: Obsidian? Or maybe sunset/warm? Let's stick to user request: 16-21 Obsidian, 21-06 Dark
+                // User Request: "sunrise from morning 6 to 9 then 9 to 16 light then 16 to 21 obsedian then 21 to 6 dark"
+
+                if (hour >= 6 && hour < 9) setEffectiveTheme('sunrise');
+                else if (hour >= 9 && hour < 16) setEffectiveTheme('light');
+                else if (hour >= 16 && hour < 21) setEffectiveTheme('obsidian'); // User asked for Obsidian in evening
+                else setEffectiveTheme('dark'); // Night
+            } else {
+                // Device Sync
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setEffectiveTheme(prefersDark ? deviceDark : deviceLight);
+            }
+        };
+
+        calculateTheme();
+
+        // Listeners
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleSystemChange = () => {
+            if (themeMode === 'auto' && autoType === 'device') calculateTheme();
+        };
+        mediaQuery.addEventListener('change', handleSystemChange);
+
+        // Interval for time-based checks (every minute is enough)
+        const interval = setInterval(calculateTheme, 60000);
+
+        return () => {
+            mediaQuery.removeEventListener('change', handleSystemChange);
+            clearInterval(interval);
+        };
+    }, [themeMode, autoType, deviceDark, deviceLight]);
+
+    // Apply Effective Theme to DOM
+    useEffect(() => {
+        const root = document.documentElement;
+        root.classList.remove('dark', 'light', 'obsidian', 'sunrise');
+
+        // Map abstract themes to Tailwind classes
+        // 'dark' -> class 'dark'
+        // 'light' -> no class (default) or explicit 'light' if needed? Tailwind is usually dark-mode based.
+        // But we might need specific classes for obsidian/sunrise to override variables.
+
+        if (effectiveTheme === 'dark') {
+            root.classList.add('dark');
+        } else if (effectiveTheme === 'obsidian') {
+            root.classList.add('dark', 'obsidian'); // Obsidian inherits dark but adds overrides
+        } else if (effectiveTheme === 'sunrise') {
+            root.classList.add('sunrise'); // Sunrise is light-based
         }
-    }, [theme]);
+        // 'light' just removes 'dark', no extra class needed unless we want to be explicit
+
+    }, [effectiveTheme]);
 
     // Save changes
     useEffect(() => {
         if (!loading) {
             localforage.setItem('progress', progress).catch(err => console.error(err));
-            localforage.setItem('theme', theme).catch(err => console.error(err));
+            localforage.setItem('themeMode', themeMode).catch(err => console.error(err));
+            localforage.setItem('autoType', autoType).catch(err => console.error(err));
+            localforage.setItem('deviceDark', deviceDark).catch(err => console.error(err));
+            localforage.setItem('deviceLight', deviceLight).catch(err => console.error(err));
+
             localforage.setItem('searchHistory', searchHistory).catch(err => console.error(err));
             localforage.setItem('expandedTopics', expandedTopics).catch(err => console.error(err));
             localforage.setItem('expansionMode', expansionMode).catch(err => console.error(err));
+            localforage.setItem('startUpMode', startUpMode).catch(err => console.error(err));
         }
-    }, [progress, theme, searchHistory, expandedTopics, expansionMode, loading]);
+    }, [progress, themeMode, autoType, deviceDark, deviceLight, searchHistory, expandedTopics, expansionMode, startUpMode, loading]);
 
     const updateStatus = (topicId, status) => {
         setProgress(prev => {
@@ -114,9 +194,6 @@ export const SyllabusProvider = ({ children }) => {
         await localforage.removeItem('progress');
     };
 
-    const toggleTheme = () => {
-        setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-    };
 
     const [focusedTopicId, setFocusedTopicId] = useState(null);
 
@@ -236,6 +313,38 @@ export const SyllabusProvider = ({ children }) => {
         setDeepDiveUrl(url);
     };
 
+    // PWA Install Logic
+    const [deferredPrompt, setDeferredPrompt] = useState(null);
+    const [isInstallable, setIsInstallable] = useState(false);
+
+    useEffect(() => {
+        const handleBeforeInstallPrompt = (e) => {
+            e.preventDefault();
+            setDeferredPrompt(e);
+            setIsInstallable(true);
+        };
+
+        window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+        // Check if already installed
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone || document.referrer.includes('android-app://');
+        if (isStandalone) setIsInstallable(false);
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+        };
+    }, []);
+
+    const installApp = async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            setDeferredPrompt(null);
+            setIsInstallable(false);
+        }
+    };
+
     const getStats = () => {
         if (!flatTopics.length) return { total: 0, mastered: 0, learning: 0, pending: 0 };
 
@@ -266,12 +375,19 @@ export const SyllabusProvider = ({ children }) => {
             syllabus,
             flatTopics,
             progress,
-            theme,
+            theme: effectiveTheme, // Backward compatibility for consumers using 'theme'
+            themeMode,
+            setThemeMode,
+            autoType,
+            setAutoType,
+            deviceDark,
+            setDeviceDark,
+            deviceLight,
+            setDeviceLight,
             searchHistory,
             loading,
             updateStatus,
             resetProgress,
-            toggleTheme,
             addToHistory,
             clearHistory,
             focusedTopicId,
@@ -285,7 +401,11 @@ export const SyllabusProvider = ({ children }) => {
             setExpansionMode,
             deepDiveUrl,
             setDeepDiveUrl,
-            openDeepDive
+            openDeepDive,
+            isInstallable,
+            installApp,
+            startUpMode,
+            setStartUpMode
         }}>
             {children}
         </SyllabusContext.Provider>
