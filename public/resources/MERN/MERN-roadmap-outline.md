@@ -1,0 +1,1945 @@
+# MERN Stack Interview Roadmap — Full Topic Outline
+
+## HIGH-LEVEL TOPICS
+
+1. **Interview Fundamentals & Soft Skills**
+2. **Computer Science Fundamentals**
+3. **Data Structures & Algorithms**
+4. **JavaScript (Core Language)**
+5. **TypeScript**
+6. **HTML & Web APIs**
+7. **CSS & Styling**
+8. **React.js**
+9. **Redux & State Management**
+10. **Next.js**
+11. **Node.js**
+12. **Express.js**
+13. **MongoDB & Mongoose**
+14. **Redis**
+15. **Authentication & Security**
+16. **REST API Design**
+17. **GraphQL**
+18. **Testing**
+19. **System Design & Architecture**
+20. **DevOps, CI/CD & Deployment**
+21. **Git & Version Control**
+22. **Performance Optimization**
+23. **Behavioral & HR Round**
+
+---
+
+## EXPANDED SUBTOPICS
+
+### 1. Interview Fundamentals & Soft Skills
+- Resume Building for MERN Roles
+- Portfolio & GitHub Profile
+- How to Introduce Yourself
+- STAR Method for Answers
+- Salary Negotiation
+- Remote Interview Tips
+- Communication Skills
+- Time Management in Interviews
+
+### 2. Computer Science Fundamentals
+- How the Internet Works
+  - DNS Resolution
+  - TCP/IP Model
+    - Layers (Application, Transport, Network, Link)
+    - Three-Way Handshake
+  - HTTP/HTTPS
+    - HTTP Methods (GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD)
+    - Status Codes (1xx, 2xx, 3xx, 4xx, 5xx)
+    - HTTP/1.1 vs HTTP/2 vs HTTP/3
+    - HTTPS & TLS Handshake
+  - WebSockets
+    - Handshake Upgrade
+    - Full-Duplex Communication
+    - Socket.io vs Native WebSocket
+  - Request-Response Cycle
+- Operating System Basics
+  - Processes vs Threads
+  - Concurrency vs Parallelism
+  - Memory Management
+    - Stack vs Heap
+    - Virtual Memory
+    - Paging & Segmentation
+  - Deadlocks
+    - Conditions for Deadlock
+    - Prevention & Avoidance
+  - File Systems
+- Database Fundamentals
+  - SQL vs NoSQL
+  - ACID Properties
+  - BASE Properties
+  - CAP Theorem
+  - Normalization (1NF, 2NF, 3NF, BCNF)
+  - Denormalization
+  - Indexing Basics
+    - B-Tree Index
+    - Hash Index
+  - Transactions
+    - Isolation Levels
+  - Sharding vs Replication
+- Object-Oriented Programming
+  - Classes & Objects
+  - Encapsulation
+  - Abstraction
+  - Inheritance
+    - Single, Multiple, Multilevel
+    - Prototype-based in JS
+  - Polymorphism
+    - Method Overloading
+    - Method Overriding
+  - SOLID Principles
+    - Single Responsibility
+    - Open/Closed
+    - Liskov Substitution
+    - Interface Segregation
+    - Dependency Inversion
+  - Design Patterns
+    - Singleton
+    - Factory
+    - Observer
+    - Module
+    - Strategy
+    - Decorator
+    - Proxy
+
+### 3. Data Structures & Algorithms
+- Big O Notation
+  - Time Complexity
+    - Best, Average, Worst Case
+  - Space Complexity
+  - Amortized Analysis
+- Arrays
+  - Static vs Dynamic Arrays
+  - Two Pointer Technique
+  - Sliding Window
+  - Kadane's Algorithm
+  - Prefix Sum
+  - Matrix / 2D Array Problems
+- Strings
+  - String Manipulation
+  - Palindrome Checks
+  - Anagram Detection
+  - Pattern Matching
+    - KMP Algorithm
+    - Rabin-Karp
+  - String Compression
+- Linked Lists
+  - Singly Linked List
+  - Doubly Linked List
+  - Circular Linked List
+  - Fast & Slow Pointers
+  - Reverse a Linked List
+  - Detect Cycle
+  - Merge Two Sorted Lists
+- Stacks
+  - Implementation (Array & Linked List)
+  - Monotonic Stack
+  - Balanced Parentheses
+  - Next Greater Element
+  - Min Stack
+  - Infix, Prefix, Postfix Conversion
+- Queues
+  - Implementation (Array, Linked List, Circular)
+  - Priority Queue
+  - Deque
+  - BFS with Queue
+- Hash Maps / Hash Tables
+  - Hash Functions
+  - Collision Handling
+    - Chaining
+    - Open Addressing
+  - Frequency Counting
+  - Two Sum Pattern
+  - Group Anagrams
+- Trees
+  - Binary Tree
+    - Traversals (Inorder, Preorder, Postorder, Level-order)
+    - Height / Depth
+    - Diameter
+    - Lowest Common Ancestor
+  - Binary Search Tree (BST)
+    - Insert, Delete, Search
+    - Validate BST
+    - Kth Smallest Element
+  - AVL Tree
+  - Red-Black Tree
+  - Trie (Prefix Tree)
+    - Insert, Search, StartsWith
+    - Autocomplete
+  - Segment Tree
+  - Fenwick Tree / BIT
+- Heaps
+  - Min Heap / Max Heap
+  - Heap Sort
+  - Top K Elements
+  - Median of Stream
+- Graphs
+  - Representation (Adjacency List, Matrix)
+  - BFS (Breadth-First Search)
+  - DFS (Depth-First Search)
+  - Topological Sort
+  - Dijkstra's Algorithm
+  - Bellman-Ford
+  - Floyd-Warshall
+  - Union-Find / Disjoint Set
+  - Minimum Spanning Tree
+    - Kruskal's
+    - Prim's
+  - Cycle Detection
+    - Directed Graphs
+    - Undirected Graphs
+  - Strongly Connected Components
+- Recursion & Backtracking
+  - Base Case & Recursive Case
+  - Memoization
+  - N-Queens
+  - Sudoku Solver
+  - Permutations & Combinations
+  - Subset Sum
+- Dynamic Programming
+  - Top-Down (Memoization)
+  - Bottom-Up (Tabulation)
+  - 0/1 Knapsack
+  - Longest Common Subsequence
+  - Longest Increasing Subsequence
+  - Coin Change
+  - Edit Distance
+  - Matrix Chain Multiplication
+  - DP on Trees
+  - DP on Grids
+- Sorting Algorithms
+  - Bubble Sort
+  - Selection Sort
+  - Insertion Sort
+  - Merge Sort
+  - Quick Sort
+    - Partition Schemes (Lomuto, Hoare)
+  - Heap Sort
+  - Counting Sort
+  - Radix Sort
+  - Bucket Sort
+- Searching Algorithms
+  - Linear Search
+  - Binary Search
+    - Lower Bound / Upper Bound
+    - Search in Rotated Sorted Array
+    - Binary Search on Answer
+  - Ternary Search
+- Greedy Algorithms
+  - Activity Selection
+  - Fractional Knapsack
+  - Huffman Coding
+  - Interval Scheduling
+
+### 4. JavaScript (Core Language)
+- Execution Context
+  - Global Execution Context
+  - Function Execution Context
+  - Execution Stack (Call Stack)
+- Hoisting
+  - Variable Hoisting (var vs let/const)
+  - Function Hoisting
+  - Temporal Dead Zone
+- Scope
+  - Global Scope
+  - Function Scope
+  - Block Scope
+  - Lexical Scope
+  - Scope Chain
+- Closures
+  - Practical Use Cases
+  - Memory Leaks with Closures
+  - Module Pattern
+  - Data Privacy
+  - Currying with Closures
+- `this` Keyword
+  - In Global Context
+  - In Object Methods
+  - In Arrow Functions
+  - call(), apply(), bind()
+  - `this` in Event Handlers
+  - `this` in Classes
+- Prototypes & Inheritance
+  - Prototype Chain
+  - `__proto__` vs `prototype`
+  - Object.create()
+  - Constructor Functions
+  - ES6 Classes
+    - Constructor
+    - Methods
+    - Static Methods
+    - Private Fields (#)
+    - Getters & Setters
+  - Class Inheritance (extends, super)
+  - Mixins
+- Data Types & Coercion
+  - Primitive Types (string, number, bigint, boolean, undefined, null, symbol)
+  - Reference Types (Object, Array, Function)
+  - Type Coercion
+    - Implicit vs Explicit
+    - == vs ===
+    - Truthy & Falsy Values
+  - typeof & instanceof
+  - Symbol
+    - Well-known Symbols
+    - Symbol.iterator
+- Functions
+  - Function Declaration vs Expression
+  - Arrow Functions
+  - IIFE
+  - Higher-Order Functions
+  - Callback Functions
+  - Pure Functions
+  - Function Composition
+  - Rest & Spread Parameters
+  - Default Parameters
+  - Arguments Object
+  - Generator Functions
+    - yield
+    - Iterators & Iterables
+    - for...of
+- Promises & Async
+  - Promise States (pending, fulfilled, rejected)
+  - .then(), .catch(), .finally()
+  - Promise.all()
+  - Promise.allSettled()
+  - Promise.race()
+  - Promise.any()
+  - Async/Await
+    - Error Handling with try/catch
+    - Sequential vs Parallel Execution
+    - Top-Level Await
+  - Microtask Queue vs Macrotask Queue
+- Event Loop
+  - Call Stack
+  - Web APIs
+  - Callback Queue (Task Queue)
+  - Microtask Queue
+  - Rendering Pipeline
+  - setTimeout / setInterval
+  - requestAnimationFrame
+  - queueMicrotask
+- Error Handling
+  - try/catch/finally
+  - Custom Error Classes
+  - Error Types (TypeError, ReferenceError, SyntaxError, RangeError)
+  - Error Propagation
+  - Unhandled Promise Rejections
+- Array Methods
+  - Mutating (push, pop, shift, unshift, splice, sort, reverse, fill)
+  - Non-Mutating (map, filter, reduce, find, findIndex, some, every, includes, flat, flatMap, slice, concat)
+  - Array.from(), Array.of(), Array.isArray()
+  - Destructuring
+- Object Methods
+  - Object.keys(), values(), entries()
+  - Object.assign()
+  - Object.freeze(), Object.seal()
+  - Computed Property Names
+  - Optional Chaining (?.)
+  - Nullish Coalescing (??)
+  - Destructuring
+  - Spread Operator
+  - Property Shorthand
+- Map, Set, WeakMap, WeakSet
+  - Map vs Object
+  - Set vs Array
+  - WeakMap (Garbage Collection)
+  - WeakSet
+- Modules
+  - CommonJS (require/module.exports)
+  - ES Modules (import/export)
+  - Default vs Named Exports
+  - Dynamic Import()
+  - Tree Shaking
+  - Circular Dependencies
+- DOM Manipulation
+  - Selecting Elements
+  - Creating & Removing Elements
+  - Event Handling
+    - addEventListener
+    - Event Bubbling & Capturing
+    - Event Delegation
+    - stopPropagation & preventDefault
+  - DOM Traversal
+  - Reflow & Repaint
+  - MutationObserver
+  - IntersectionObserver
+- Regular Expressions
+  - Pattern Syntax
+  - Flags (g, i, m, s, u, y)
+  - Groups & Capture
+  - Lookahead & Lookbehind
+  - Common Patterns (email, URL, phone)
+- Storage APIs
+  - localStorage
+  - sessionStorage
+  - Cookies
+    - HttpOnly, Secure, SameSite
+  - IndexedDB
+- Web Workers
+  - Dedicated Workers
+  - Shared Workers
+  - Service Workers
+  - Transferable Objects
+- Memory Management
+  - Garbage Collection
+    - Mark-and-Sweep
+    - Reference Counting
+  - Memory Leaks
+    - Common Causes
+    - Detection & Profiling
+  - WeakRef & FinalizationRegistry
+
+### 5. TypeScript
+- Basic Types
+  - Primitives (string, number, boolean)
+  - any, unknown, never, void
+  - Literal Types
+  - Tuple Types
+  - Enum
+    - Numeric Enum
+    - String Enum
+    - const Enum
+- Type Annotations & Inference
+  - Variable Annotations
+  - Function Parameters & Return Types
+  - Contextual Typing
+- Interfaces vs Types
+  - Interface Declaration
+  - Type Alias
+  - Extending Interfaces
+  - Intersection Types (&)
+  - Union Types (|)
+  - Declaration Merging
+  - When to Use Which
+- Generics
+  - Generic Functions
+  - Generic Interfaces
+  - Generic Classes
+  - Generic Constraints (extends)
+  - Default Type Parameters
+  - Conditional Types
+    - infer Keyword
+    - Distributive Conditional Types
+- Utility Types
+  - Partial<T>
+  - Required<T>
+  - Readonly<T>
+  - Pick<T, K>
+  - Omit<T, K>
+  - Record<K, V>
+  - Exclude, Extract, NonNullable
+  - ReturnType<T>
+  - Parameters<T>
+  - InstanceType<T>
+- Advanced Types
+  - Mapped Types
+  - Template Literal Types
+  - Discriminated Unions
+  - Type Guards
+    - typeof
+    - instanceof
+    - in operator
+    - Custom Type Guards (is)
+  - Type Assertions (as)
+  - Index Signatures
+  - keyof & typeof Operators
+- Decorators
+  - Class Decorators
+  - Method Decorators
+  - Property Decorators
+  - Parameter Decorators
+  - Decorator Factories
+- Module System
+  - Namespaces
+  - Module Resolution
+  - Declaration Files (.d.ts)
+  - @types Packages
+  - tsconfig.json
+    - compilerOptions
+    - strict Mode
+    - paths & baseUrl
+    - target & module
+
+---
+
+### 6. HTML & Web APIs
+- Semantic HTML
+  - header, nav, main, section, article, aside, footer
+  - Importance for SEO
+  - Importance for Accessibility
+- Forms
+  - Input Types (text, email, password, number, date, file, checkbox, radio, range, color)
+  - Form Validation
+    - Built-in Validation (required, pattern, min, max, minlength, maxlength)
+    - Custom Validation (setCustomValidity)
+  - FormData API
+  - Form Submission (action, method, enctype)
+  - Controlled vs Uncontrolled (React context)
+- Accessibility (a11y)
+  - ARIA Roles
+  - ARIA Attributes (aria-label, aria-describedby, aria-hidden, aria-live)
+  - Focus Management
+  - Keyboard Navigation
+  - Screen Reader Support
+  - Alt Text for Images
+  - Color Contrast
+- Media Elements
+  - img (srcset, sizes, lazy loading)
+  - video & audio
+  - picture Element
+  - Responsive Images
+- Meta Tags & SEO
+  - Open Graph Tags
+  - Twitter Card Tags
+  - Viewport Meta
+  - Canonical URL
+  - robots.txt
+  - Sitemap
+  - Structured Data / JSON-LD
+- Web APIs
+  - Fetch API
+    - Request/Response Objects
+    - AbortController
+    - Streaming Responses
+  - Web Storage API (localStorage, sessionStorage)
+  - History API (pushState, replaceState, popstate)
+  - Geolocation API
+  - Notification API
+  - Clipboard API
+  - Drag & Drop API
+  - File API / FileReader
+  - Canvas API (basics)
+  - Web Speech API
+  - Performance API
+    - performance.now()
+    - Performance Observer
+    - Navigation Timing
+  - Resize Observer
+  - Intersection Observer
+  - Mutation Observer
+- Shadow DOM & Web Components
+  - Custom Elements
+  - Shadow DOM
+  - HTML Templates
+  - Slots
+- iframe & Embedding
+  - Same-Origin Policy
+  - postMessage API
+  - sandbox Attribute
+
+### 7. CSS & Styling
+- Selectors
+  - Type, Class, ID
+  - Attribute Selectors
+  - Pseudo-classes (:hover, :focus, :nth-child, :first-child, :last-child, :not, :is, :where, :has)
+  - Pseudo-elements (::before, ::after, ::placeholder, ::selection)
+  - Combinators (descendant, child, sibling, general sibling)
+- Specificity & Cascade
+  - Specificity Calculation
+  - !important
+  - Inheritance
+  - Cascade Layers (@layer)
+- Box Model
+  - Content, Padding, Border, Margin
+  - box-sizing (content-box vs border-box)
+  - Margin Collapsing
+  - Outline vs Border
+- Layout
+  - Display (block, inline, inline-block, none, contents)
+  - Flexbox
+    - Container Properties (flex-direction, flex-wrap, justify-content, align-items, align-content, gap)
+    - Item Properties (flex-grow, flex-shrink, flex-basis, order, align-self)
+  - CSS Grid
+    - Grid Template (rows, columns, areas)
+    - Grid Placement (grid-column, grid-row, span)
+    - Auto-flow & Auto-fill / Auto-fit
+    - Subgrid
+    - Named Grid Lines
+  - Positioning (static, relative, absolute, fixed, sticky)
+  - Float & Clear
+  - Z-index & Stacking Context
+  - Multi-Column Layout
+- Responsive Design
+  - Media Queries
+    - Breakpoints
+    - prefers-color-scheme
+    - prefers-reduced-motion
+  - Viewport Units (vw, vh, vmin, vmax, dvh, svh, lvh)
+  - Container Queries
+  - Fluid Typography (clamp())
+  - Mobile-First vs Desktop-First
+- Typography
+  - Font Properties (family, size, weight, style, variant)
+  - @font-face
+  - Variable Fonts
+  - Line Height & Letter Spacing
+  - Text Overflow & Ellipsis
+  - Writing Modes
+- Colors & Backgrounds
+  - Color Formats (hex, rgb, hsl, oklch, hwb)
+  - Gradients (linear, radial, conic)
+  - Background Properties (size, position, repeat, attachment, clip)
+  - Backdrop Filter
+  - mix-blend-mode
+- Transitions & Animations
+  - Transition Properties (property, duration, timing-function, delay)
+  - @keyframes
+  - Animation Properties (name, duration, iteration, direction, fill-mode, play-state)
+  - Transform (translate, rotate, scale, skew)
+  - Will-change
+  - Scroll-driven Animations
+- CSS Variables (Custom Properties)
+  - Declaration & Usage (--var, var())
+  - Scope & Fallback
+  - Dynamic Theming
+- CSS-in-JS
+  - Styled Components
+  - Emotion
+  - CSS Modules
+  - Tailwind CSS
+    - Utility Classes
+    - Custom Configuration
+    - @apply Directive
+    - JIT Mode
+    - Responsive Utilities
+    - Dark Mode
+  - Sass/SCSS
+    - Variables, Nesting, Mixins
+    - Extends & Placeholders
+    - Functions & Loops
+    - Partials & Import
+
+### 8. React.js
+- JSX
+  - JSX Syntax Rules
+  - Expressions in JSX
+  - Conditional Rendering
+    - Ternary Operator
+    - Logical && Operator
+    - if/else with Variables
+  - Lists & Keys
+    - Key Prop Importance
+    - Index as Key Anti-pattern
+  - Fragment (<> </>)
+  - Dangerously Set InnerHTML
+- Components
+  - Functional Components
+  - Class Components (Legacy)
+  - Component Composition
+  - Props
+    - Passing Props
+    - Default Props
+    - Children Prop
+    - Render Props Pattern
+    - Prop Drilling Problem
+  - Pure Components
+  - Higher-Order Components (HOC)
+  - Component Lifecycle (Class)
+    - Mounting (constructor, render, componentDidMount)
+    - Updating (shouldComponentUpdate, render, componentDidUpdate)
+    - Unmounting (componentWillUnmount)
+    - Error Boundaries (componentDidCatch, getDerivedStateFromError)
+- Hooks
+  - useState
+    - Lazy Initialization
+    - Functional Updates
+    - State Batching
+  - useEffect
+    - Dependencies Array
+    - Cleanup Function
+    - Stale Closures
+    - Infinite Loop Pitfalls
+    - Data Fetching Pattern
+  - useContext
+    - Creating Context
+    - Provider Pattern
+    - Consuming Context
+    - Performance Issues
+  - useReducer
+    - Reducer Pattern
+    - Action Dispatching
+    - Complex State Logic
+    - useReducer vs useState
+  - useCallback
+    - Memoizing Callbacks
+    - When to Use
+    - Dependency Array
+  - useMemo
+    - Memoizing Expensive Computations
+    - When to Use vs When to Avoid
+    - Referential Equality
+  - useRef
+    - DOM References
+    - Mutable Values (no re-render)
+    - Previous Value Pattern
+    - Forwarding Refs (forwardRef)
+  - useLayoutEffect
+    - vs useEffect
+    - DOM Measurement Use Case
+  - useId
+  - useTransition
+    - Concurrent Features
+    - startTransition
+    - isPending
+  - useDeferredValue
+  - useSyncExternalStore
+  - useImperativeHandle
+  - Custom Hooks
+    - Creating Custom Hooks
+    - Rules of Hooks
+    - Common Custom Hooks (useDebounce, useLocalStorage, useFetch, useOnClickOutside, useMediaQuery, useIntersectionObserver)
+- State Management Patterns
+  - Lifting State Up
+  - Co-locating State
+  - Context + useReducer
+  - State Machines (XState)
+- Rendering
+  - Virtual DOM
+    - Diffing Algorithm
+    - Reconciliation
+    - Fiber Architecture
+  - React.memo
+  - Re-render Triggers
+  - Batched Updates
+  - Concurrent Rendering
+    - Time Slicing
+    - Suspense
+    - Streaming SSR
+  - React Server Components (RSC)
+    - Server vs Client Components
+    - "use client" / "use server" Directives
+    - Data Fetching in RSC
+- Routing
+  - React Router v6
+    - BrowserRouter
+    - Routes & Route
+    - Link & NavLink
+    - useNavigate
+    - useParams
+    - useSearchParams
+    - useLocation
+    - Nested Routes
+    - Outlet
+    - Dynamic Routes
+    - Protected Routes
+    - Lazy Loading Routes (React.lazy + Suspense)
+    - Loaders & Actions (Data APIs)
+- Forms in React
+  - Controlled Components
+  - Uncontrolled Components
+  - React Hook Form
+    - useForm
+    - register
+    - handleSubmit
+    - Validation (Yup, Zod)
+    - Field Arrays
+    - Watch & setValue
+  - Formik (comparison)
+- Styling in React
+  - Inline Styles
+  - CSS Modules
+  - Styled Components
+  - Tailwind CSS with React
+  - className vs style prop
+- Data Fetching
+  - useEffect + fetch
+  - Axios
+  - React Query / TanStack Query
+    - useQuery
+    - useMutation
+    - Query Invalidation
+    - Caching Strategies
+    - Optimistic Updates
+    - Infinite Queries
+    - Prefetching
+  - SWR
+  - Suspense for Data Fetching
+- Error Handling
+  - Error Boundaries
+  - Fallback UI
+  - try/catch in Event Handlers
+  - React Query Error Handling
+- Portals
+  - createPortal
+  - Modal Implementation
+  - Tooltip Implementation
+- Performance
+  - Code Splitting (React.lazy, dynamic import)
+  - Memoization (React.memo, useMemo, useCallback)
+  - Virtualization (react-window, react-virtuoso)
+  - Profiler API
+  - DevTools Performance Tab
+  - Avoiding Unnecessary Re-renders
+  - Image Optimization
+  - Bundle Size Analysis
+- Patterns & Architecture
+  - Container/Presentational Pattern
+  - Compound Components
+  - Provider Pattern
+  - Observer Pattern
+  - Mediator Pattern
+  - Custom Hooks Pattern
+  - Controlled vs Uncontrolled Components
+  - Headless Components
+  - Atomic Design
+- Testing React
+  - Jest
+  - React Testing Library
+    - render, screen, fireEvent, waitFor
+    - userEvent
+    - Custom Render with Providers
+  - Snapshot Testing
+  - Mocking Modules
+  - Testing Hooks
+  - Testing Async Code
+  - MSW (Mock Service Worker)
+
+### 9. Redux & State Management
+- Core Concepts
+  - Store
+  - Actions
+  - Action Creators
+  - Reducers
+    - Pure Functions
+    - Combining Reducers (combineReducers)
+    - Root Reducer
+  - Dispatch
+  - Selectors
+  - Unidirectional Data Flow
+- Redux Toolkit (RTK)
+  - configureStore
+  - createSlice
+    - Reducers
+    - Extra Reducers
+    - Prepare Callbacks
+  - createAsyncThunk
+    - Pending, Fulfilled, Rejected
+    - Thunk API (getState, dispatch, rejectWithValue)
+  - createEntityAdapter
+  - createSelector (Reselect)
+    - Memoized Selectors
+    - Input Selectors
+    - Derived Data
+- RTK Query
+  - createApi
+  - fetchBaseQuery
+  - Endpoints (query, mutation)
+  - Cache Tags
+  - Automatic Re-fetching
+  - Polling
+  - Optimistic Updates
+  - Code Generation (OpenAPI)
+  - Comparison with React Query
+- Middleware
+  - Custom Middleware
+  - Redux Thunk
+  - Redux Saga
+    - Generators
+    - Effects (take, put, call, fork, select)
+    - Watchers
+    - Workers
+  - Redux Observable (RxJS)
+- React-Redux
+  - Provider
+  - useSelector
+  - useDispatch
+  - connect() (Legacy)
+  - mapStateToProps / mapDispatchToProps (Legacy)
+- State Normalization
+  - Normalized Shape
+  - Entities & IDs
+  - Denormalization
+- DevTools
+  - Redux DevTools Extension
+  - Time Travel Debugging
+  - Action Replay
+- Alternative State Managers
+  - Zustand
+  - Jotai
+  - Recoil
+  - MobX
+  - Valtio
+
+### 10. Next.js
+- Project Structure
+  - App Router (app/)
+  - Pages Router (pages/) [Legacy]
+  - File-based Routing
+  - Route Groups
+  - Parallel Routes
+  - Intercepting Routes
+- Routing
+  - Dynamic Routes ([slug])
+  - Catch-All Routes ([...slug])
+  - Optional Catch-All ([[...slug]])
+  - Route Handlers (route.ts)
+  - Middleware
+    - matcher Config
+    - Request/Response Manipulation
+    - Redirects & Rewrites
+  - Loading UI (loading.tsx)
+  - Error Handling (error.tsx)
+  - Not Found (not-found.tsx)
+  - Layout (layout.tsx)
+    - Root Layout
+    - Nested Layouts
+    - Template vs Layout
+- Rendering Strategies
+  - Server-Side Rendering (SSR)
+    - getServerSideProps (Pages Router)
+    - Dynamic Rendering (App Router)
+  - Static Site Generation (SSG)
+    - getStaticProps (Pages Router)
+    - getStaticPaths (Pages Router)
+    - generateStaticParams (App Router)
+  - Incremental Static Regeneration (ISR)
+    - revalidate
+    - On-Demand Revalidation
+  - Client-Side Rendering (CSR)
+  - Streaming
+    - React Suspense
+    - Streaming SSR
+  - Partial Pre-rendering (PPR)
+- Server Components
+  - Server vs Client Components
+  - "use client" Directive
+  - "use server" Directive
+  - Server Actions
+    - Form Actions
+    - Mutations
+    - Revalidation
+    - Redirects
+  - Data Fetching in Server Components
+    - fetch with cache options
+    - Revalidation Strategies
+    - Parallel Data Fetching
+    - Sequential Data Fetching
+  - Composition Patterns
+    - Server Component with Client Children
+    - Passing Server Data to Client
+- API Routes
+  - Pages Router: pages/api/
+  - App Router: route.ts
+  - Request & Response Helpers
+  - Dynamic API Routes
+  - API Middleware
+- Data Fetching
+  - fetch API (Extended)
+    - cache: 'force-cache' | 'no-store'
+    - next: { revalidate }
+    - next: { tags }
+  - Server Actions for Mutations
+  - revalidatePath / revalidateTag
+  - Cookies & Headers Access
+  - Parallel & Sequential Fetching
+- Caching
+  - Request Memoization
+  - Data Cache
+  - Full Route Cache
+  - Router Cache
+  - Cache Invalidation
+  - unstable_cache
+- Optimization
+  - Image Optimization (next/image)
+    - Sizing & Layout
+    - Formats (WebP, AVIF)
+    - Priority Loading
+    - Placeholder (blur)
+  - Font Optimization (next/font)
+    - Google Fonts
+    - Local Fonts
+    - Variable Fonts
+  - Script Optimization (next/script)
+    - Loading Strategies (beforeInteractive, afterInteractive, lazyOnload, worker)
+  - Metadata API
+    - Static Metadata
+    - Dynamic Metadata (generateMetadata)
+    - Open Graph
+    - JSON-LD
+  - Link Prefetching (next/link)
+  - Bundle Analysis
+- Authentication in Next.js
+  - NextAuth.js / Auth.js
+    - Providers (Google, GitHub, Credentials)
+    - Session Management
+    - JWT vs Database Sessions
+    - Middleware Protection
+  - Clerk
+  - Custom Auth
+- Internationalization (i18n)
+  - App Router i18n
+  - Locale Detection
+  - Route Localization
+- Deployment
+  - Vercel
+  - Self-hosted (Node.js server)
+  - Docker
+  - Edge Runtime vs Node.js Runtime
+  - Environment Variables
+
+---
+
+### 11. Node.js
+- Node.js Architecture
+  - V8 Engine
+  - libuv
+  - Event-Driven Architecture
+  - Non-blocking I/O
+  - Single-Threaded Event Loop
+    - Phases (Timers, Pending, Idle, Poll, Check, Close)
+    - process.nextTick vs setImmediate
+    - Microtasks vs Macrotasks
+- Core Modules
+  - fs (File System)
+    - Sync vs Async Methods
+    - Streams-based File I/O
+    - fs.promises API
+    - Watching Files (fs.watch)
+  - path
+    - join, resolve, basename, dirname, extname
+    - path.sep & Cross-platform
+  - os
+  - http / https
+    - Creating Server
+    - Request & Response Objects
+    - Handling POST Data
+  - url
+    - URL Class
+    - Query String Parsing
+  - crypto
+    - Hashing (SHA, MD5)
+    - HMAC
+    - Encryption/Decryption (AES)
+    - Random Bytes
+    - bcrypt vs crypto
+  - events
+    - EventEmitter
+    - on, emit, once, removeListener
+    - Custom Events
+    - Error Event
+  - child_process
+    - exec, execFile, spawn, fork
+    - IPC Communication
+  - cluster
+    - Master-Worker Pattern
+    - Load Balancing
+    - PM2 Clustering
+  - worker_threads
+    - SharedArrayBuffer
+    - MessageChannel
+    - Worker Pools
+  - stream
+    - Readable Streams
+    - Writable Streams
+    - Transform Streams
+    - Duplex Streams
+    - Piping
+    - Backpressure
+  - buffer
+    - Buffer.from, Buffer.alloc
+    - Encoding/Decoding
+    - Binary Data Handling
+  - net
+    - TCP Server/Client
+    - Sockets
+  - util
+    - promisify
+    - inspect
+    - types
+- NPM & Package Management
+  - package.json
+    - dependencies vs devDependencies
+    - peerDependencies
+    - scripts
+    - engines
+    - main, module, exports
+  - package-lock.json
+  - Semantic Versioning
+  - npx
+  - Publishing Packages
+  - Monorepos (npm workspaces, Turborepo, Lerna)
+- Environment & Configuration
+  - process.env
+  - dotenv
+  - config Management
+  - NODE_ENV
+  - Command Line Arguments (process.argv)
+- Error Handling in Node.js
+  - Uncaught Exceptions
+  - Unhandled Rejections
+  - Operational vs Programmer Errors
+  - Error-first Callbacks
+  - Graceful Shutdown
+- Debugging
+  - Node Inspector
+  - --inspect Flag
+  - Chrome DevTools
+  - VS Code Debugger
+  - console.trace
+  - Debug Module
+- Process Management
+  - PM2
+    - Cluster Mode
+    - Process Monitoring
+    - Log Management
+    - Ecosystem File
+  - Forever
+  - Nodemon (Development)
+- Security
+  - Input Validation
+  - Rate Limiting
+  - Helmet.js
+  - CORS
+  - SQL/NoSQL Injection Prevention
+  - XSS Prevention
+  - CSRF Protection
+  - Dependency Auditing (npm audit)
+- Performance
+  - Profiling (clinic.js)
+  - Memory Leak Detection
+  - CPU Profiling
+  - Event Loop Monitoring
+  - Caching Strategies
+  - Connection Pooling
+- Real-time Communication
+  - WebSockets
+  - Socket.io
+    - Rooms & Namespaces
+    - Broadcasting
+    - Acknowledgements
+    - Error Handling
+  - Server-Sent Events (SSE)
+
+### 12. Express.js
+- Basics
+  - Creating an Express App
+  - app.listen
+  - Request & Response Objects
+  - req.params, req.query, req.body, req.headers, req.cookies
+  - res.json, res.send, res.status, res.redirect, res.render
+- Routing
+  - Route Methods (get, post, put, patch, delete)
+  - Route Parameters
+  - Query Parameters
+  - Route Handlers (Multiple Callbacks)
+  - express.Router
+    - Modular Routes
+    - Route Prefixing
+    - Router-level Middleware
+  - Route Chaining (app.route)
+- Middleware
+  - What is Middleware
+  - Application-level Middleware
+  - Router-level Middleware
+  - Error-handling Middleware
+    - 4-parameter Signature
+    - Centralized Error Handler
+    - Custom Error Classes
+  - Built-in Middleware
+    - express.json()
+    - express.urlencoded()
+    - express.static()
+  - Third-party Middleware
+    - cors
+    - helmet
+    - morgan
+    - compression
+    - cookie-parser
+    - express-rate-limit
+    - express-validator
+  - Custom Middleware
+    - Authentication Middleware
+    - Logging Middleware
+    - Request Validation Middleware
+  - Middleware Execution Order
+  - next() Function
+- Request Validation
+  - express-validator
+    - body(), param(), query()
+    - validationResult
+    - Custom Validators
+    - Sanitization
+  - Joi
+  - Zod
+  - Schema Validation Pattern
+- File Handling
+  - Multer
+    - Single File Upload
+    - Multiple File Upload
+    - File Filtering
+    - Storage (disk, memory)
+  - Streaming Uploads
+  - File Download (res.download)
+- Template Engines
+  - EJS
+  - Pug
+  - Handlebars
+  - Server-Side Rendering with Express
+- Session & Cookies
+  - express-session
+    - Session Store (Memory, Redis, MongoDB)
+    - Session Configuration
+  - Cookie Configuration
+    - httpOnly, secure, sameSite, maxAge
+  - Signed Cookies
+- Architecture Patterns
+  - MVC Pattern
+  - Service Layer Pattern
+  - Repository Pattern
+  - Controller Pattern
+  - Route → Controller → Service → Model
+  - Dependency Injection
+- Error Handling Patterns
+  - try/catch in Async Handlers
+  - express-async-handler
+  - Global Error Handler
+  - HTTP Error Responses
+  - Error Logging
+
+### 13. MongoDB & Mongoose
+- MongoDB Fundamentals
+  - Document Model
+  - Collections & Documents
+  - BSON Data Types
+  - _id & ObjectId
+  - Embedded Documents vs References
+  - MongoDB Atlas
+    - Cluster Setup
+    - Connection String
+    - Network Access
+    - Database Users
+- CRUD Operations
+  - insertOne / insertMany
+  - find / findOne
+  - updateOne / updateMany
+    - $set, $unset, $inc, $push, $pull, $addToSet
+    - Upsert
+  - deleteOne / deleteMany
+  - replaceOne
+  - bulkWrite
+- Query Operators
+  - Comparison ($eq, $ne, $gt, $gte, $lt, $lte, $in, $nin)
+  - Logical ($and, $or, $not, $nor)
+  - Element ($exists, $type)
+  - Array ($all, $elemMatch, $size)
+  - Regex ($regex)
+  - Evaluation ($expr, $jsonSchema)
+- Aggregation Framework
+  - Pipeline Concept
+  - Stages
+    - $match
+    - $project
+    - $group
+    - $sort
+    - $limit / $skip
+    - $unwind
+    - $lookup (Joins)
+    - $addFields
+    - $count
+    - $facet
+    - $bucket / $bucketAuto
+    - $merge / $out
+  - Aggregation Operators
+    - $sum, $avg, $min, $max
+    - $first, $last
+    - $arrayElemAt, $filter, $map, $reduce
+    - $cond, $switch, $ifNull
+  - Aggregation Performance
+- Indexing
+  - Single Field Index
+  - Compound Index
+  - Multikey Index (Arrays)
+  - Text Index
+  - Geospatial Index (2dsphere)
+  - Hashed Index
+  - TTL Index
+  - Unique Index
+  - Partial Index
+  - Sparse Index
+  - Index Intersection
+  - explain() for Query Analysis
+  - Index Strategies & Best Practices
+- Mongoose ODM
+  - Connection (mongoose.connect)
+    - Connection Options
+    - Connection Events
+    - Multiple Connections
+  - Schema
+    - Schema Types (String, Number, Boolean, Date, ObjectId, Array, Map, Mixed)
+    - Required, Default, Enum, Min, Max, MinLength, MaxLength
+    - Custom Validators
+    - Schema Methods
+    - Schema Statics
+    - Schema Virtuals
+      - Virtual Populate
+    - Schema Middleware (Hooks)
+      - Pre Hooks (save, validate, remove, updateOne, find)
+      - Post Hooks
+      - Error Handling Middleware
+    - Schema Plugins
+    - Schema Options (timestamps, toJSON, toObject, versionKey)
+    - Discriminators (Inheritance)
+  - Model
+    - Model.create
+    - Model.find, findOne, findById
+    - Model.updateOne, findByIdAndUpdate, findOneAndUpdate
+    - Model.deleteOne, findByIdAndDelete
+    - Model.countDocuments, estimatedDocumentCount
+    - Model.aggregate
+    - Model.populate
+      - Deep Population
+      - Virtual Population
+      - Selective Population
+    - Model.lean()
+    - Model.distinct
+  - Queries
+    - Query Chaining
+    - Query Helpers
+    - Select & Projection
+    - Sort, Limit, Skip
+    - Pagination Patterns
+      - Offset-based
+      - Cursor-based
+  - Transactions
+    - session.startTransaction
+    - commitTransaction / abortTransaction
+    - withTransaction Helper
+   - Data Modeling Patterns
+    - One-to-One (Embedded)
+    - One-to-Many (Embedded)
+    - One-to-Many (Referenced)
+    - Many-to-Many
+    - Bucket Pattern
+    - Outlier Pattern
+    - Attribute Pattern
+    - Schema Versioning
+- Change Streams
+  - Watching Collections
+  - Resume Token
+  - Pipeline Filters
+
+### 14. Redis
+- Redis Fundamentals
+  - In-Memory Data Store
+  - Key-Value Model
+  - Persistence
+    - RDB Snapshots
+    - AOF (Append Only File)
+    - Hybrid Persistence
+  - Redis CLI
+  - Redis Server Configuration
+- Data Types
+  - Strings
+    - SET, GET, INCR, DECR, APPEND
+    - SETEX, SETNX, MSET, MGET
+  - Lists
+    - LPUSH, RPUSH, LPOP, RPOP
+    - LRANGE, LLEN, LINDEX
+    - Blocking Operations (BLPOP, BRPOP)
+  - Sets
+    - SADD, SREM, SMEMBERS, SISMEMBER
+    - SUNION, SINTER, SDIFF
+  - Sorted Sets (ZSets)
+    - ZADD, ZREM, ZRANGE, ZREVRANGE
+    - ZSCORE, ZRANK, ZRANGEBYSCORE
+    - Leaderboards
+  - Hashes
+    - HSET, HGET, HGETALL, HDEL
+    - HINCRBY
+    - Object Storage Pattern
+  - Streams
+    - XADD, XREAD, XRANGE
+    - Consumer Groups
+    - Acknowledgements
+  - Bitmaps
+  - HyperLogLog
+  - Geospatial
+- Key Management
+  - Key Expiration (EXPIRE, TTL, PERSIST)
+  - Key Patterns (KEYS, SCAN)
+  - Key Naming Conventions
+  - DEL vs UNLINK
+- Redis as Cache
+  - Cache-Aside Pattern
+  - Write-Through Cache
+  - Write-Behind Cache
+  - Cache Invalidation Strategies
+  - TTL-based Expiration
+  - LRU Eviction Policy
+  - Cache Stampede Prevention
+  - Node.js Redis Client (ioredis / node-redis)
+    - Connection & Configuration
+    - Pipelining
+    - Transactions (MULTI/EXEC)
+- Redis Pub/Sub
+  - PUBLISH, SUBSCRIBE, UNSUBSCRIBE
+  - Pattern Subscriptions (PSUBSCRIBE)
+  - Real-time Notifications
+  - Chat Applications
+- Redis in MERN Stack
+  - Session Storage
+  - Rate Limiting
+  - Job Queues (Bull / BullMQ)
+    - Queue, Worker, Job
+    - Delayed Jobs
+    - Repeatable Jobs
+    - Job Events
+    - Concurrency
+  - Real-time Features
+  - Caching API Responses
+  - Distributed Locks (Redlock)
+- Redis Cluster
+  - Replication
+  - Sentinel (High Availability)
+  - Cluster Mode
+  - Partitioning
+- Redis Performance
+  - Pipelining
+  - Lua Scripting
+  - Memory Optimization
+  - Slow Log
+
+### 15. Authentication & Security
+- Authentication Methods
+  - Session-based Authentication
+    - Cookie + Session ID
+    - Session Store (Memory, Redis, MongoDB)
+    - Session Hijacking Prevention
+  - Token-based Authentication
+    - JWT (JSON Web Token)
+      - Header, Payload, Signature
+      - Access Token vs Refresh Token
+      - Token Storage (httpOnly Cookie vs localStorage)
+      - Token Expiration & Renewal
+      - JWT Verification
+      - Signing Algorithms (HS256, RS256)
+    - Bearer Token
+  - OAuth 2.0
+    - Authorization Code Flow
+    - PKCE Flow
+    - Implicit Flow (Deprecated)
+    - Client Credentials Flow
+    - Scopes & Permissions
+    - Refresh Tokens
+  - OpenID Connect (OIDC)
+  - Social Login (Google, GitHub, Facebook)
+  - Magic Links
+  - Passwordless Authentication
+  - Multi-Factor Authentication (MFA/2FA)
+    - TOTP (Google Authenticator)
+    - SMS OTP
+    - Backup Codes
+  - Passport.js
+    - Strategies (Local, JWT, Google, GitHub)
+    - Serialize/Deserialize
+    - Session Integration
+- Authorization
+  - Role-Based Access Control (RBAC)
+  - Permission-Based Access Control
+  - Attribute-Based Access Control (ABAC)
+  - Middleware-based Authorization
+  - Route Guards (Frontend)
+  - API Authorization Patterns
+- Password Security
+  - Hashing (bcrypt, argon2, scrypt)
+  - Salting
+  - Password Policies
+  - Password Reset Flow
+  - Forgot Password Implementation
+- Web Security
+  - OWASP Top 10
+  - Cross-Site Scripting (XSS)
+    - Stored XSS
+    - Reflected XSS
+    - DOM-based XSS
+    - Prevention (Sanitization, CSP)
+  - Cross-Site Request Forgery (CSRF)
+    - CSRF Tokens
+    - SameSite Cookies
+    - Double Submit Cookie
+  - SQL / NoSQL Injection
+    - Query Parameterization
+    - MongoDB Injection Prevention
+  - Security Headers
+    - Content-Security-Policy
+    - X-Content-Type-Options
+    - X-Frame-Options
+    - Strict-Transport-Security (HSTS)
+    - X-XSS-Protection
+    - Referrer-Policy
+  - CORS
+    - Origin, Methods, Headers
+    - Credentials
+    - Preflight Requests (OPTIONS)
+    - Whitelisting Origins
+  - HTTPS & TLS
+  - Rate Limiting & Brute Force Protection
+  - Input Validation & Sanitization
+  - Clickjacking Prevention
+  - File Upload Security
+  - Server-Side Request Forgery (SSRF)
+  - Insecure Direct Object References (IDOR)
+
+### 16. REST API Design
+- REST Principles
+  - Statelessness
+  - Client-Server
+  - Uniform Interface
+  - Cacheable
+  - Layered System
+  - Resource-based
+- URL Design
+  - RESTful Naming Conventions
+  - Plural Nouns
+  - Nested Resources
+  - Query Parameters
+  - Filtering, Sorting, Pagination
+  - Versioning (URL, Header, Query)
+- HTTP Methods
+  - GET, POST, PUT, PATCH, DELETE
+  - Idempotency
+  - Safe Methods
+  - HEAD, OPTIONS
+- Status Codes
+  - 200 OK, 201 Created, 204 No Content
+  - 301 Moved Permanently, 304 Not Modified
+  - 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 409 Conflict, 422 Unprocessable Entity, 429 Too Many Requests
+  - 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable
+- Request/Response
+  - Content-Type & Accept Headers
+  - JSON Response Format
+  - Error Response Format
+  - HATEOAS
+  - Envelope Pattern
+- Pagination
+  - Offset-based
+  - Cursor-based
+  - Page-based
+  - Link Headers
+- API Documentation
+  - Swagger / OpenAPI
+  - Postman Collections
+  - API Blueprint
+- API Versioning
+- Rate Limiting
+  - Token Bucket
+  - Sliding Window
+  - Fixed Window
+- File Upload APIs
+  - Multipart/form-data
+  - Streaming
+  - Presigned URLs (S3)
+
+### 17. GraphQL
+- Core Concepts
+  - Schema Definition Language (SDL)
+  - Types (Scalar, Object, Input, Enum, Union, Interface)
+  - Queries
+  - Mutations
+  - Subscriptions
+  - Resolvers
+  - Root Types (Query, Mutation, Subscription)
+- Schema Design
+  - Type Relationships
+  - Nullable vs Non-Nullable
+  - Lists & Non-Null Lists
+  - Custom Scalars
+  - Directives (@deprecated, @skip, @include)
+  - Schema Stitching
+  - Federation
+- Resolvers
+  - Resolver Arguments (parent, args, context, info)
+  - Resolver Chains
+  - DataLoader (N+1 Problem)
+  - Authentication in Resolvers
+  - Error Handling
+- Apollo Server
+  - Setup with Express
+  - Apollo Sandbox
+  - Context Function
+  - Plugins
+- Apollo Client
+  - InMemoryCache
+  - useQuery, useMutation, useSubscription
+  - Cache Policies (cache-first, network-only, cache-and-network)
+  - Optimistic UI
+  - Local State Management
+  - Pagination (fetchMore, cursor-based)
+- Comparison with REST
+  - Over-fetching & Under-fetching
+  - When to Use GraphQL
+  - When to Stay with REST
+
+### 18. Testing
+- Testing Fundamentals
+  - Unit Testing
+  - Integration Testing
+  - End-to-End Testing
+  - Test-Driven Development (TDD)
+  - Behavior-Driven Development (BDD)
+  - Testing Pyramid
+  - Test Coverage
+- Jest
+  - Test Structure (describe, it, test)
+  - Assertions (expect, toBe, toEqual, toContain, toThrow, toHaveBeenCalled)
+  - Setup & Teardown (beforeAll, beforeEach, afterAll, afterEach)
+  - Mocking
+    - jest.fn()
+    - jest.mock()
+    - jest.spyOn()
+    - Manual Mocks
+    - Module Mocking
+  - Async Testing
+    - done Callback
+    - Promises
+    - async/await
+  - Snapshot Testing
+  - Code Coverage (--coverage)
+  - Configuration (jest.config.js)
+  - Custom Matchers
+- React Testing Library
+  - Guiding Principles
+  - Queries (getBy, queryBy, findBy, getAllBy)
+  - screen Object
+  - fireEvent vs userEvent
+  - waitFor & findBy (Async)
+  - renderHook
+  - Custom Render (with Providers)
+  - Testing Forms
+  - Testing Routing
+  - Testing Context
+  - Testing Custom Hooks
+- API Testing
+  - Supertest
+    - Testing Express Routes
+    - Testing Middleware
+    - Testing Error Handlers
+  - MSW (Mock Service Worker)
+    - Request Handlers
+    - Server Setup
+    - Network Error Simulation
+  - Postman / Newman
+- E2E Testing
+  - Cypress
+    - Commands (visit, get, click, type, should)
+    - Assertions
+    - Fixtures
+    - Intercepting Network Requests
+    - Custom Commands
+  - Playwright
+    - Page Object Model
+    - Auto-waiting
+    - Multi-browser Testing
+- MongoDB Testing
+  - mongodb-memory-server
+  - Test Database Setup/Teardown
+  - Seeding Test Data
+- Performance Testing
+  - Load Testing (k6, Artillery)
+  - Stress Testing
+  - Benchmark Testing
+
+### 19. System Design & Architecture
+- Fundamentals
+  - Scalability (Horizontal vs Vertical)
+  - Reliability
+  - Availability
+  - Latency vs Throughput
+  - Consistency vs Availability (CAP)
+  - Load Balancing
+    - Round Robin
+    - Least Connections
+    - IP Hash
+    - Nginx
+  - Reverse Proxy
+- Caching
+  - Client-Side Caching
+  - CDN Caching
+  - Server-Side Caching (Redis)
+  - Database Query Caching
+  - Cache Invalidation Strategies
+  - Cache Patterns (Cache-Aside, Write-Through, Write-Behind)
+- Database Design
+  - Schema Design Patterns
+  - Indexing Strategies
+  - Sharding
+    - Hash-based
+    - Range-based
+  - Replication
+    - Primary-Secondary
+    - Primary-Primary
+  - Read Replicas
+  - Connection Pooling
+  - Database Per Service
+- Message Queues
+  - RabbitMQ
+  - Apache Kafka
+    - Topics, Partitions, Consumer Groups
+  - Bull/BullMQ (Redis-based)
+  - Event-Driven Architecture
+  - Pub/Sub Pattern
+  - Dead Letter Queue
+- Microservices
+  - Monolith vs Microservices
+  - Service Communication
+    - REST
+    - gRPC
+    - Message Queue
+  - API Gateway
+  - Service Discovery
+  - Circuit Breaker Pattern
+  - Saga Pattern
+  - Event Sourcing
+  - CQRS
+  - Database per Service
+- Design Patterns
+  - MVC
+  - Repository Pattern
+  - Factory Pattern
+  - Observer Pattern
+  - Strategy Pattern
+  - Decorator Pattern
+  - Singleton Pattern
+  - Middleware Pattern
+  - Adapter Pattern
+- Common System Design Questions
+  - URL Shortener
+  - Chat Application (WhatsApp/Slack)
+  - Social Media Feed
+  - E-Commerce System
+  - Notification System
+  - File Storage System (Dropbox)
+  - Rate Limiter
+  - Search Autocomplete
+  - Real-time Collaboration (Google Docs)
+- Frontend Architecture
+  - Micro-Frontends
+  - Module Federation
+  - Monorepo vs Polyrepo
+  - Feature Flags
+  - A/B Testing Architecture
+  - Error Tracking (Sentry)
+  - Analytics Integration
+
+### 20. DevOps, CI/CD & Deployment
+- Docker
+  - Dockerfile
+    - FROM, RUN, COPY, CMD, ENTRYPOINT, EXPOSE, WORKDIR, ENV, ARG
+    - Multi-stage Builds
+    - .dockerignore
+  - Docker Images
+    - Layers
+    - Image Optimization
+  - Docker Containers
+    - Container Lifecycle
+    - Port Mapping
+    - Volume Mounting
+    - Environment Variables
+  - Docker Compose
+    - Multi-container Setup
+    - Networks
+    - Volumes
+    - Depends On
+  - Docker Networking
+    - Bridge, Host, None
+    - Container Communication
+- CI/CD
+  - GitHub Actions
+    - Workflows
+    - Jobs & Steps
+    - Triggers (push, pull_request, schedule)
+    - Secrets & Variables
+    - Matrix Builds
+    - Caching Dependencies
+    - Custom Actions
+  - Jenkins (Basics)
+  - GitLab CI (Basics)
+  - CI/CD Pipeline Design
+    - Build Stage
+    - Test Stage
+    - Deploy Stage
+    - Rollback Strategy
+- Cloud Deployment
+  - AWS
+    - EC2
+    - S3
+    - Lambda
+    - RDS
+    - CloudFront
+    - Route 53
+    - ECS / EKS
+    - IAM
+  - Vercel
+    - Serverless Functions
+    - Edge Functions
+    - Preview Deployments
+  - Railway / Render
+  - DigitalOcean
+  - Heroku (Legacy)
+- Monitoring & Logging
+  - Application Logging
+    - Winston
+    - Pino
+    - Morgan (HTTP)
+    - Log Levels
+    - Structured Logging
+  - Monitoring
+    - Health Checks
+    - Uptime Monitoring
+    - APM (Application Performance Monitoring)
+  - Error Tracking
+    - Sentry
+    - LogRocket
+  - Metrics & Alerts
+- Infrastructure
+  - Nginx
+    - Reverse Proxy
+    - Load Balancing
+    - SSL Termination
+    - Static File Serving
+    - Gzip Compression
+  - SSL/TLS Certificates (Let's Encrypt)
+  - DNS Configuration
+  - Environment Management
+  - Kubernetes (Basics)
+    - Pods, Services, Deployments
+    - ConfigMaps & Secrets
+
+### 21. Git & Version Control
+- Git Basics
+  - init, clone, status, add, commit, push, pull, fetch
+  - .gitignore
+  - Git Config (user, editor, aliases)
+- Branching
+  - Creating & Deleting Branches
+  - Switching Branches (checkout, switch)
+  - Branch Naming Conventions
+  - Feature Branches
+- Merging
+  - Fast-Forward Merge
+  - Three-Way Merge
+  - Merge Conflicts
+    - Resolution Strategies
+    - Conflict Markers
+- Rebasing
+  - Interactive Rebase
+  - Rebase vs Merge
+  - Squashing Commits
+  - Rewriting History
+- Advanced Git
+  - Cherry-Pick
+  - Stash
+    - stash push, pop, list, apply, drop
+  - Git Reset (soft, mixed, hard)
+  - Git Revert
+  - Git Bisect
+  - Git Reflog
+  - Git Hooks
+    - Pre-commit (Husky, lint-staged)
+    - Commit Message Validation (Commitlint)
+  - Git Tags
+  - Submodules
+- Workflows
+  - Git Flow
+  - GitHub Flow
+  - Trunk-Based Development
+  - Conventional Commits
+  - Pull Request Best Practices
+  - Code Review Guidelines
+
+### 22. Performance Optimization
+- Frontend Performance
+  - Core Web Vitals
+    - LCP (Largest Contentful Paint)
+    - FID / INP (Interaction to Next Paint)
+    - CLS (Cumulative Layout Shift)
+  - Bundle Optimization
+    - Code Splitting
+    - Tree Shaking
+    - Dynamic Import
+    - Lazy Loading Components
+    - Bundle Analysis (webpack-bundle-analyzer)
+  - Image Optimization
+    - Lazy Loading (loading="lazy")
+    - Responsive Images (srcset)
+    - Modern Formats (WebP, AVIF)
+    - Image CDN
+    - Sprites & SVG Icons
+  - Rendering Performance
+    - Debouncing & Throttling
+    - Virtual Scrolling
+    - requestAnimationFrame
+    - will-change
+    - Avoiding Layout Thrashing
+    - CSS Containment
+  - Network Optimization
+    - HTTP/2 Multiplexing
+    - Compression (gzip, Brotli)
+    - Preloading & Prefetching
+    - Resource Hints (preload, prefetch, preconnect, dns-prefetch)
+    - CDN Usage
+    - Service Workers (Offline Caching)
+  - Caching
+    - Browser Cache (Cache-Control, ETag, Last-Modified)
+    - Service Worker Cache
+    - CDN Cache
+- Backend Performance
+  - Database Query Optimization
+    - Indexing
+    - Query Profiling (explain)
+    - Avoiding N+1 Queries
+    - Projection
+    - Lean Queries (Mongoose)
+  - Connection Pooling
+  - Caching (Redis)
+  - Response Compression
+  - Pagination
+  - Worker Threads for CPU Tasks
+  - Stream Processing
+  - Load Balancing
+- Profiling Tools
+  - Chrome DevTools (Performance, Memory, Network)
+  - Lighthouse
+  - React DevTools Profiler
+  - Node.js Profiling (clinic.js, 0x)
+  - webpack-bundle-analyzer
+
+### 23. Behavioral & HR Round
+- Common Questions
+  - Tell Me About Yourself
+  - Why This Company?
+  - Strengths & Weaknesses
+  - Where Do You See Yourself in 5 Years?
+  - Why Are You Leaving?
+  - Describe a Challenge You Faced
+  - Describe a Conflict with a Teammate
+  - Describe a Project You're Proud Of
+- STAR Method
+  - Situation
+  - Task
+  - Action
+  - Result
+- Technical Communication
+  - Explaining Technical Concepts to Non-Technical People
+  - Whiteboard Problem Solving
+  - Think Out Loud
+  - Asking Clarifying Questions
+  - Handling "I Don't Know" Gracefully
+- Culture & Work Style
+  - Agile/Scrum Experience
+  - Remote Work Experience
+  - Team Collaboration
+  - Code Review Culture
+  - Mentoring Experience
+  - Continuous Learning
+- Salary Negotiation
+  - Market Research
+  - Total Compensation
+  - Counter-Offer Strategy
+  - Benefits & Equity
+
+---
