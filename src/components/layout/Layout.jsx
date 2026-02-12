@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import clsx from 'clsx';
 import { useSyllabus } from '../../context/SyllabusContext';
 import DeepDiveModal from '../common/DeepDiveModal';
+import InstallPrompt from '../common/InstallPrompt';
 
 const Layout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -63,6 +64,9 @@ const Layout = () => {
                     onClose={() => setDeepDiveUrl(null)}
                 />
             )}
+
+            {/* PWA Install Prompt (Mobile Only) */}
+            <InstallPrompt />
         </div>
     );
 };
