@@ -1,7 +1,14 @@
 {
-  "name": "temp_init",
+  "name": "vertex-mern-prep",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Premium roadmap and tracker for MERN stack mastery.",
+  "author": "Akshit Kamboz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akshitkamboz13/Mern-Interview-Prep.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
