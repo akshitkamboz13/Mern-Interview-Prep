@@ -60,7 +60,7 @@ const Revision = () => {
                 <p className="text-slate-500 dark:text-slate-400 max-w-md mb-8 transition-colors">
                     Start by exploring the Syllabus and marking topics as "Learning".
                 </p>
-                <a href="/tracker" className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white font-medium transition-colors shadow-lg shadow-indigo-500/20">
+                <a href="/syllabus" className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white font-medium transition-colors shadow-lg shadow-indigo-500/20">
                     Go to Syllabus
                 </a>
             </div>

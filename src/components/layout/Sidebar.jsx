@@ -15,7 +15,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
     const navItems = [
         { path: '/', label: 'Overview', icon: LayoutDashboard },
-        { path: '/tracker', label: 'Syllabus', icon: BookOpen },
+        { path: '/syllabus', label: 'Syllabus', icon: BookOpen },
         { path: '/revision', label: 'Revision', icon: Repeat },
         { path: '/settings', label: 'Settings', icon: Settings },
     ];

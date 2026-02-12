@@ -74,7 +74,7 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link to="/tracker" className="group relative overflow-hidden bg-white dark:bg-gradient-to-br dark:from-indigo-900 dark:to-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-indigo-500/30 hover:border-indigo-300 dark:hover:border-indigo-500/50 transition-all shadow-sm dark:shadow-lg">
+                <Link to="/syllabus" className="group relative overflow-hidden bg-white dark:bg-gradient-to-br dark:from-indigo-900 dark:to-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-indigo-500/30 hover:border-indigo-300 dark:hover:border-indigo-500/50 transition-all shadow-sm dark:shadow-lg">
                     <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-10 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity">
                         <BookOpen size={100} className="text-indigo-900 dark:text-white" />
                     </div>

@@ -281,7 +281,7 @@ const Settings = () => {
                                         onClick={() => {
                                             if (item.topicId) {
                                                 focusTopic(item.topicId);
-                                                navigate('/tracker');
+                                                navigate('/syllabus');
                                             }
                                         }}
                                         title={item.topicId ? "Go to Topic" : "Topic"}
