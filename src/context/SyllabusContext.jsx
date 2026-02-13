@@ -430,25 +430,44 @@ export const SyllabusProvider = ({ children }) => {
 
         const randomTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)];
 
-        const title = "Ready to learn?";
-        const body = `How about a quick session on "${randomTopic.title}"?`;
+        const title = "Ready to learn? 🚀";
+        const options = {
+            body: `How about a quick session on "${randomTopic.title}"?`,
+            icon: '/pwa-192x192.png',
+            tag: 'study-reminder',
+            requireInteraction: true,
+            data: { url: '/syllabus' }
+        };
 
         try {
-            const notif = new Notification(title, {
-                body,
-                icon: '/pwa-192x192.png',
-                tag: 'study-reminder',
-                requireInteraction: true
-            });
-
-            notif.onclick = () => {
-                window.focus();
-                notif.close();
-            };
+            // Try Service Worker first
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                // Check if SW is actively controlling the page
+                try {
+                    const registration = await navigator.serviceWorker.ready;
+                    await registration.showNotification(title, options);
+                    console.log("Notification sent via Service Worker:", title);
+                } catch (swError) {
+                    console.warn("SW notification failed, falling back", swError);
+                    // Fallback
+                    const notif = new Notification(title, options);
+                    notif.onclick = () => {
+                        window.focus();
+                        notif.close();
+                    };
+                }
+            } else {
+                // Fallback to legacy API
+                const notif = new Notification(title, options);
+                notif.onclick = () => {
+                    window.focus();
+                    notif.close();
+                };
+                console.log("Notification sent via legacy API:", title);
+            }
 
             // Update lastNotified
             setNotificationSettings(prev => ({ ...prev, lastNotified: Date.now() }));
-            console.log("Notification sent:", title);
         } catch (e) {
             console.error("Notification failed", e);
             alert("Failed to send notification. Error: " + e.message);
