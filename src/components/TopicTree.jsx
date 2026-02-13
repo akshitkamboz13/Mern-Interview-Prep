@@ -65,7 +65,11 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
     // Scroll into view if matches exactly
     React.useEffect(() => {
         if (focusedTopicId === node.id && nodeRef.current) {
-            nodeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Slight delay to allow expansion animation to start/finish
+            const timer = setTimeout(() => {
+                nodeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+            return () => clearTimeout(timer);
         }
     }, [focusedTopicId, node.id]);
 
@@ -82,7 +86,8 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                     isExpandable ? "cursor-pointer" : "cursor-default",
                     isExpandable && levelStyle.hover,
                     levelStyle.border,
-                    isOpen && isExpandable ? levelStyle.bg : "bg-transparent"
+                    isOpen && isExpandable ? levelStyle.bg : "bg-transparent",
+                    focusedTopicId === node.id && "ring-2 ring-indigo-500/50 bg-indigo-50/50 dark:bg-indigo-900/20 rounded-lg"
                 )}
                 style={{ paddingLeft: `max(0.5rem, calc(${depth} * 1rem + 0.5rem))` }}
                 onClick={() => isExpandable && toggleTopicExpansion(node.id)}
