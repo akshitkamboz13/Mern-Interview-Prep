@@ -40,7 +40,7 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
     const nodeRef = React.useRef(null);
     const status = getTopicStatus(node.id);
     const hasChildren = node.children && node.children.length > 0;
-    const isLeaf = !hasChildren;
+    const isExpandable = hasChildren || !!node.description;
 
     const levelStyle = getLevelStyle(depth);
 
@@ -78,13 +78,14 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
         <div className="select-none relative" ref={nodeRef}>
             <div
                 className={clsx(
-                    "group flex flex-col sm:flex-row sm:items-center py-3 sm:py-3 pr-2 sm:pr-4 border-b border-slate-100 dark:border-slate-800/30 transition-all duration-200 cursor-pointer border-l-4",
-                    levelStyle.hover,
+                    "group flex flex-col sm:flex-row sm:items-center py-3 sm:py-3 pr-2 sm:pr-4 border-b border-slate-100 dark:border-slate-800/30 transition-all duration-200 border-l-4",
+                    isExpandable ? "cursor-pointer" : "cursor-default",
+                    isExpandable && levelStyle.hover,
                     levelStyle.border,
-                    isOpen && hasChildren ? levelStyle.bg : "bg-transparent"
+                    isOpen && isExpandable ? levelStyle.bg : "bg-transparent"
                 )}
                 style={{ paddingLeft: `max(0.5rem, calc(${depth} * 1rem + 0.5rem))` }}
-                onClick={() => toggleTopicExpansion(node.id)}
+                onClick={() => isExpandable && toggleTopicExpansion(node.id)}
             >
                 <div className="flex items-start w-full sm:w-auto">
                     {/* Expand/Collapse Icon */}
@@ -96,7 +97,10 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                         ) : (
                             // Dot for leaf nodes
                             <div className="w-[18px] flex justify-center pt-1 sm:pt-0">
-                                <div className={clsx("w-2 h-2 rounded-full ring-2 ring-slate-200 dark:ring-slate-900", status === 'Mastered' ? "bg-emerald-500" : status === 'Learning' ? "bg-amber-500" : "bg-slate-300 dark:bg-slate-700")} />
+                                <div className={clsx("w-2 h-2 rounded-full ring-2 ring-slate-200 dark:ring-slate-900 transition-colors",
+                                    status === 'Mastered' ? "bg-emerald-500" : status === 'Learning' ? "bg-amber-500" : "bg-slate-300 dark:bg-slate-700",
+                                    isExpandable && "group-hover:scale-125"
+                                )} />
                             </div>
                         )}
                     </div>
