@@ -10,7 +10,7 @@
   ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=flat&logo=tailwind-css&logoColor=white)
   ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=flat&logo=vite&logoColor=white)
   
-  [**Start Preparation**](https://interview.si4k.online) · [Report Bug](https://github.com/akshitkamboz13/Mern-Interview-Prep/issues) · [Request Feature](https://github.com/akshitkamboz13/Mern-Interview-Prep/issues)
+  [**Start Preparation**](https://interview.si4k.online) · [Report Bug](https://github.com/akshitkamboz13/VERTEX-Master-Mern-Stack/issues) · [Request Feature](https://github.com/akshitkamboz13/VERTEX-Master-Mern-Stack/issues)
 </div>
 
 ---
@@ -56,8 +56,8 @@ Unlike static lists, VERTEX is a **Progressive Web App (PWA)** that tracks your 
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/akshitkamboz13/Mern-Interview-Prep.git
-    cd Mern-Interview-Prep
+    git clone https://github.com/akshitkamboz13/VERTEX-Master-Mern-Stack.git
+    cd VERTEX-Master-Mern-Stack
     ```
 
 2.  **Install dependencies**
