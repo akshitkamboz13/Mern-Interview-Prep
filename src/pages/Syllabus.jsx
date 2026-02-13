@@ -9,6 +9,15 @@ export default function Syllabus() {
     const { syllabus, loading, flatTopics } = useSyllabus();
     const { scrollRef } = useOutletContext();
     const [searchQuery, setSearchQuery] = React.useState('');
+    const [debouncedSearchQuery, setDebouncedSearchQuery] = React.useState('');
+
+    // Debounce Search
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearchQuery(searchQuery);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [searchQuery]);
 
     // Scroll Persistence
     useEffect(() => {
@@ -47,14 +56,14 @@ export default function Syllabus() {
     }, [loading, scrollRef]);
 
     const filteredTopics = React.useMemo(() => {
-        if (!searchQuery.trim()) return null;
-        const lowerQuery = searchQuery.toLowerCase();
+        if (!debouncedSearchQuery.trim()) return null;
+        const lowerQuery = debouncedSearchQuery.toLowerCase();
         return flatTopics.filter(topic =>
             topic.title.toLowerCase().includes(lowerQuery) ||
             topic.description?.toLowerCase().includes(lowerQuery) ||
             topic.briefDescription?.toLowerCase().includes(lowerQuery)
         );
-    }, [searchQuery, flatTopics]);
+    }, [debouncedSearchQuery, flatTopics]);
 
     if (loading) {
         return (

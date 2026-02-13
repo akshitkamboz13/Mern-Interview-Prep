@@ -90,7 +90,7 @@ const TopicNode = ({ node, depth = 0, onDeepDive }) => {
                 <div className="flex items-start w-full sm:w-auto">
                     {/* Expand/Collapse Icon */}
                     <div className={clsx("mr-2 mt-1 sm:mt-0 transition-colors flex-shrink-0", levelStyle.text)}>
-                        {hasChildren ? (
+                        {isExpandable ? (
                             <div className={clsx("transform transition-transform duration-200", isOpen && "rotate-90")}>
                                 <ChevronRight size={18} />
                             </div>
