@@ -1,8 +1,20 @@
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { clientsClaim } from 'workbox-core';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
 
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
+
+// Cache the specific roadmap data with StaleWhileRevalidate (fastest for user, updates in background)
+registerRoute(
+    ({ url }) => url.pathname.includes('MERN-roadmap-data.json'),
+    new StaleWhileRevalidate({
+        cacheName: 'roadmap-data-cache',
+    })
+);
+
+// Optional: Cache other external resources or specific API calls if any (none for now, mostly static)
 
 self.skipWaiting();
 clientsClaim();

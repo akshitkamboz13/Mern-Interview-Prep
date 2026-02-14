@@ -191,13 +191,19 @@ const Settings = () => {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-sm font-medium text-slate-800 dark:text-slate-200">Enable Notifications</p>
-                                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Get random topic suggestions to keep you on track.</p>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                                    {Notification.permission === 'denied'
+                                        ? <span className="text-rose-500 font-medium">Permission blocked in browser settings.</span>
+                                        : "Get random topic suggestions to keep you on track."
+                                    }
+                                </p>
                             </div>
-                            <label className="relative inline-flex items-center cursor-pointer">
+                            <label className={clsx("relative inline-flex items-center cursor-pointer", Notification.permission === 'denied' && "opacity-50 pointer-events-none")}>
                                 <input
                                     type="checkbox"
                                     className="sr-only peer"
                                     checked={notificationSettings.enabled}
+                                    disabled={Notification.permission === 'denied'}
                                     onChange={async (e) => {
                                         const isEnabled = e.target.checked;
                                         if (isEnabled) {
@@ -205,7 +211,9 @@ const Settings = () => {
                                             if (granted) {
                                                 setNotificationSettings(prev => ({ ...prev, enabled: true }));
                                             } else {
+                                                // If denied during request, force update
                                                 alert("Permission denied. Please enable notifications in your browser settings.");
+                                                // Trigger re-render or check
                                             }
                                         } else {
                                             setNotificationSettings(prev => ({ ...prev, enabled: false }));
@@ -220,21 +228,73 @@ const Settings = () => {
                             <div className="animate-in slide-in-from-top-4 duration-300 space-y-4">
                                 <div>
                                     <label className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Frequency</label>
-                                    <div className="grid grid-cols-3 gap-2">
-                                        {['hourly', 'daily', 'weekly'].map((freq) => (
-                                            <button
-                                                key={freq}
-                                                onClick={() => setNotificationSettings(prev => ({ ...prev, frequency: freq }))}
-                                                className={clsx(
-                                                    "py-2 rounded-lg text-xs font-medium capitalize transition-all border",
-                                                    notificationSettings.frequency === freq
-                                                        ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30"
-                                                        : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50"
-                                                )}
-                                            >
-                                                {freq}
-                                            </button>
-                                        ))}
+                                    <div className="space-y-3">
+                                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                            {['hourly', 'daily', 'weekly', 'custom'].map((freq) => (
+                                                <button
+                                                    key={freq}
+                                                    onClick={() => setNotificationSettings(prev => ({ ...prev, frequency: freq }))}
+                                                    className={clsx(
+                                                        "py-2 rounded-lg text-xs font-medium capitalize transition-all border",
+                                                        notificationSettings.frequency === freq
+                                                            ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-500/30"
+                                                            : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50"
+                                                    )}
+                                                >
+                                                    {freq}
+                                                </button>
+                                            ))}
+                                        </div>
+
+                                        {/* Custom Frequency Input */}
+                                        {notificationSettings.frequency === 'custom' && (
+                                            <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-800/50 animate-in slide-in-from-top-2">
+                                                <label className="text-xs font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+                                                    Notifications per day
+                                                </label>
+                                                <div className="flex items-center gap-3">
+                                                    <input
+                                                        type="number"
+                                                        min="1"
+                                                        max="20"
+                                                        value={notificationSettings.customFrequency || ''}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value;
+                                                            // Handle empty string temporarily
+                                                            if (val === '') {
+                                                                setNotificationSettings(prev => ({ ...prev, customFrequency: '' }));
+                                                                return;
+                                                            }
+
+                                                            let num = parseInt(val);
+                                                            if (!isNaN(num)) {
+                                                                // Clamp immediately
+                                                                if (num < 1) num = 1;
+                                                                if (num > 20) num = 20;
+
+                                                                setNotificationSettings(prev => ({
+                                                                    ...prev,
+                                                                    customFrequency: num,
+                                                                    // Force regeneration on change (debouncing would be better but this works for now)
+                                                                    lastGeneratedDate: null
+                                                                }));
+                                                            }
+                                                        }}
+                                                        onBlur={() => {
+                                                            // Ensure not empty on blur
+                                                            if (!notificationSettings.customFrequency) {
+                                                                setNotificationSettings(prev => ({ ...prev, customFrequency: 3, lastGeneratedDate: null }));
+                                                            }
+                                                        }}
+                                                        className="w-20 px-3 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                                                    />
+                                                    <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                                                        Randomly distributed with weighted probability (more in evening, less at night).
+                                                        <br /> Max 20/day.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
@@ -482,7 +542,7 @@ const Settings = () => {
                     <div className="space-y-4">
                         <div className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-slate-700/50">
                             <span className="text-slate-500 dark:text-slate-400 text-sm transition-colors">Version</span>
-                            <span className="text-slate-800 dark:text-slate-200 font-mono text-sm transition-colors">v1.4.1</span>
+                            <span className="text-slate-800 dark:text-slate-200 font-mono text-sm transition-colors">v{__APP_VERSION__}</span>
                         </div>
 
                         <div className="flex justify-between items-center py-2 border-b border-slate-100 dark:border-slate-700/50">

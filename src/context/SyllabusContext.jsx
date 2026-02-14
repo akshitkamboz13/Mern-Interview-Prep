@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import localforage from 'localforage';
+import { generateDailySchedule, shouldTriggerNotification } from '../utils/scheduler';
 
 const SyllabusContext = createContext();
 
@@ -35,8 +36,24 @@ export const SyllabusProvider = ({ children }) => {
             try {
                 // ... (Load Syllabus & Progress - Keeping existing code structure if possible, but for brevity re-implementing relevant parts)
                 // 1. Load Syllabus Data
-                const response = await fetch('/resources/MERN/MERN-roadmap-data.json');
-                const data = await response.json();
+                // 1. Load Syllabus Data
+                let data = null;
+                try {
+                    const response = await fetch('/resources/MERN/MERN-roadmap-data.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    data = await response.json();
+
+                    // Cache it for offline use (redundancy to SW)
+                    localforage.setItem('cachedSyllabus', data).catch(e => console.error("Failed to cache syllabus", e));
+                } catch (networkError) {
+                    console.warn("Network Fetch failed, trying local cache", networkError);
+                    data = await localforage.getItem('cachedSyllabus');
+                }
+
+                if (!data) {
+                    throw new Error("Could not load syllabus data (Offline & No Cache)");
+                }
+
                 setSyllabus(data);
 
                 // 2. Flatten topics
@@ -401,14 +418,56 @@ export const SyllabusProvider = ({ children }) => {
     // Notification Logic
     const [notificationSettings, setNotificationSettings] = useState({
         enabled: false,
-        frequency: 'daily', // 'daily', 'hourly', 'weekly'
+        frequency: 'daily', // 'daily', 'hourly', 'weekly', 'custom'
+        customFrequency: 3,
+        schedule: [],
+        lastGeneratedDate: null,
         lastNotified: null
     });
 
+    // Permission Sync & Robustness
+    useEffect(() => {
+        const checkPermission = () => {
+            if ('Notification' in window) {
+                if (Notification.permission === 'denied' && notificationSettings.enabled) {
+                    console.log("Permission revoked externally, disabling notifications.");
+                    setNotificationSettings(prev => ({ ...prev, enabled: false }));
+                }
+            }
+        };
+
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                checkPermission();
+            }
+        };
+
+        window.addEventListener('visibilitychange', handleVisibilityChange);
+        // Also check on mount
+        checkPermission();
+
+        return () => {
+            window.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [notificationSettings.enabled]);
+
     useEffect(() => {
         const loadSettings = async () => {
-            const stored = await localforage.getItem('notificationSettings');
-            if (stored) setNotificationSettings(stored);
+            try {
+                const stored = await localforage.getItem('notificationSettings');
+                if (stored) {
+                    // Safe merge with defaults to handle schema changes/corruption
+                    setNotificationSettings(prev => ({
+                        ...prev,
+                        ...stored,
+                        // Ensure frequency is valid
+                        customFrequency: Math.max(1, Math.min(20, Number(stored.customFrequency) || 3))
+                    }));
+                }
+            } catch (err) {
+                console.error("Failed to load notification settings", err);
+                // Keep defaults
+            }
         };
         loadSettings();
     }, []);
@@ -507,19 +566,47 @@ export const SyllabusProvider = ({ children }) => {
     const checkNotifications = () => {
         if (!notificationSettings.enabled || Notification.permission !== 'granted') return;
 
-        const now = Date.now();
-        const last = notificationSettings.lastNotified || 0;
-        let threshold = 0;
 
-        switch (notificationSettings.frequency) {
-            case 'hourly': threshold = 60 * 60 * 1000; break;
-            case 'daily': threshold = 24 * 60 * 60 * 1000; break;
-            case 'weekly': threshold = 7 * 24 * 60 * 60 * 1000; break;
-            default: threshold = 24 * 60 * 60 * 1000;
+        // Logic for Standard Frequencies (Legacy/Simple)
+        if (notificationSettings.frequency !== 'custom') {
+            const now = Date.now();
+            const last = notificationSettings.lastNotified || 0;
+            let threshold = 0;
+
+            switch (notificationSettings.frequency) {
+                case 'hourly': threshold = 60 * 60 * 1000; break;
+                case 'daily': threshold = 24 * 60 * 60 * 1000; break;
+                case 'weekly': threshold = 7 * 24 * 60 * 60 * 1000; break;
+                default: threshold = 24 * 60 * 60 * 1000;
+            }
+
+            if (now - last > threshold) {
+                sendRandomNotification();
+            }
         }
 
-        if (now - last > threshold) {
-            sendRandomNotification();
+        // Logic for Custom Frequency (Scheduler)
+        if (notificationSettings.frequency === 'custom') {
+            // Regeneration Check: New Day?
+            const today = new Date().toDateString();
+            if (notificationSettings.lastGeneratedDate !== today) {
+                // Generate new schedule for today
+                console.log("Generating new notification schedule for", today);
+                const newSchedule = generateDailySchedule(notificationSettings.customFrequency || 3);
+                setNotificationSettings(prev => ({
+                    ...prev,
+                    schedule: newSchedule,
+                    lastGeneratedDate: today
+                }));
+                // Don't fire immediately, wait for next tick/check
+                return;
+            }
+
+            // Trigger Check
+            // We use the imported helper, but we need to ensure we don't spam.
+            if (shouldTriggerNotification(notificationSettings)) {
+                sendRandomNotification();
+            }
         }
     };
 
